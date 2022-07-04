@@ -15,19 +15,18 @@ var userSchema = new Schema({
     role:String
 },{collection:'users'})
 
-userSchema.pre('save', function (next){
-    if (this.isNew || this.isModified('password')) {
-      bcrypt.hash(this.password, 10,
-      (err, hashedPassword) => {
-        if (err)
-         next(err);
-        else {
-         this.password = hashedPassword;
-         next();
-        }
-      });
-    }
-  })
+userSchema.pre("save", async function(next) {
+  try {
+      if (!this.isModified("password")) {
+        return next();
+      }
+      let hashedPassword = await bcrypt.hash(this.password, 10);
+      this.password = hashedPassword;
+      return next();
+  } catch (err) {
+      return next(err);
+ }
+});
 
 var Users = mongoose.model('Users',userSchema)
 

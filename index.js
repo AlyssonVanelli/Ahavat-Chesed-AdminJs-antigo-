@@ -24,19 +24,36 @@ const adminJSOptions = new AdminJS({
   resources: [
     {
       resource: Destaques,
-      options: { properties: { conteudo: { type: "richtext" } } },
+      options: { properties: { conteudo: { type: "richtext" }, image: { isVisible: { edit: false, list: false, show: false, filter: false } } } },
+      features: [
+        uploadFeature({
+          provider: {
+            local: {
+              bucket: path.join(__dirname, "./public/images"),
+            },
+          },
+          properties: {
+            key: "image",
+            file: "upload file",
+          },
+          uploadPath: (record, filename) =>
+            Date.now() + ".jpg",
+        }),
+      ],
     },
     {
       resource: Users,
-      options: { properties: { 
-        password: { type: "password" ,isVisible: { edit: true, list: false, show:false, filter:false }} ,
-        role: { availableValues: [ 
-          { value: "admin", label: 'Administrador' } ,
-          { value: "user", label: 'Usuario Padrão' } 
-        ],
+      options: {
+        properties: {
+          password: { type: "password", isVisible: { edit: true, list: false, show: false, filter: false } },
+          role: {
+            availableValues: [
+              { value: "admin", label: 'Administrador' },
+              { value: "user", label: 'Usuario Padrão' }
+            ],
+          },
+        }
       },
-      } 
-    },
     },
     {
       resource: Posts,
@@ -46,7 +63,7 @@ const adminJSOptions = new AdminJS({
           titulo: { type: "richtext" },
           conteudoCurto: { type: "richtext" },
           categoria: { type: "richtext" },
-          image: { isVisible: { edit: false, list: false, show:false, filter:false } }
+          image: { isVisible: { edit: false, list: false, show: false, filter: false } }
         },
       },
       features: [
@@ -61,7 +78,7 @@ const adminJSOptions = new AdminJS({
             file: "upload file",
           },
           uploadPath: (record, filename) =>
-            Date.now()+".jpg",
+            Date.now() + ".jpg",
         }),
       ],
     },
@@ -73,8 +90,24 @@ const adminJSOptions = new AdminJS({
           titulo: { type: "richtext" },
           conteudoCurto: { type: "richtext" },
           categoria: { type: "richtext" },
+          image: { isVisible: { edit: false, list: false, show: false, filter: false } }
         },
       },
+      features: [
+        uploadFeature({
+          provider: {
+            local: {
+              bucket: path.join(__dirname, "./public/images"),
+            },
+          },
+          properties: {
+            key: "image",
+            file: "upload file",
+          },
+          uploadPath: (record, filename) =>
+            Date.now() + ".jpg",
+        }),
+      ],
     },
     {
       resource: Noticias,
@@ -84,8 +117,24 @@ const adminJSOptions = new AdminJS({
           titulo: { type: "richtext" },
           conteudoCurto: { type: "richtext" },
           categoria: { type: "richtext" },
+          image: { isVisible: { edit: false, list: false, show:false, filter:false } },
         },
       },
+      features: [
+        uploadFeature({
+          provider: {
+            local: {
+              bucket: path.join(__dirname, "./public/images"),
+            },
+          },
+          properties: {
+            key: "image",
+            file: "upload file",
+          },
+          uploadPath: (record, filename) =>
+            Date.now() + ".jpg",
+        }),
+      ],
     },
     { resource: Horarios },
   ],

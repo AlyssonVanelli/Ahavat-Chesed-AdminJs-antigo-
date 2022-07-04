@@ -1,40 +1,152 @@
-    $city="saopaulo";
-
-    $url = "https://www.hebcal.com/hebcal?v=1&cfg=json&maj=on&min=on&mod=on&nx=on&year=now&month=now&ss=on&mf=on&c=on&geo=geoname&city=BR-saopaulo&M=on&s=on";
-
-    $ch=curl_init($url);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER,true);
-    $data = json_decode(curl_exec($ch));
-
-    $sextaesabado = array_filter($data->items, function ($item){
-
-        $proximosabado = strtotime("next saturday");
-        $itemdate = strtotime($item->date);
-        $diadasemana = date("w",$itemdate);
-        return $diadasemana == 6 && $itemdate == $proximosabado;
-    });
 
 
-foreach ($sextaesabado as $item){
-    if (isset($item->leyning)){
-        $ciclo = "";
-        foreach ($item->leyning->triennial as $trecho){
-            $ciclo .="<li>".$trecho."</li>";
-        }
-        echo "<div> 
-        <h3> ".$item->title."</h3>
-        <small> ".$item->leyning->torah."</small>
-        <small> ".$item->leyning->haftarah."</small>
-        <small> ".$item->leyning->maftir."</small>
-        <ul>".$ciclo."</ul>
-        </div>";
-    }else if($item->category == "mevarchim"){
-        echo "<div> 
-        <h3> ".$item->hebrew."</h3>
-        <h3> ".$item->title."</h3>
-        <h3> ".$item->memo."</h3>
-        </div>";
+    <div class="hebcal">
+        <div class="hebcallogo">    
+            <img src="../../public/images/icons/tora.png" alt="">
+            <p>Parashá da Semana</p>
+        </div>
+        <div class="hebcaldesc">
+            <div class="hebcalparasha">
+                <div class="parashaname">
+
+                </div>
+                <div class="parashaheb">
+                    
+                </div>
+            </div>
+            <div class="hebcalverse"></div>
+        </div>
+    </div>
+    <div class="hebcalleituras">
+        <h3>Leituras:</h3>
+        <div class="leiturascompletas">
+
+        </div>
+    </div>
+
+<script>
+
+    const traducao = {
+        "Genesis": "Genesis",
+        "Exodus": "Exodus",
+        "Leviticus": "Leviticus",
+        "Numbers": "Números",
+        "Deuteronomy": "Deuteronomy",
+        "Judges": "Juízes"
     }
-    echo "<hr/>";
 
-}
+    const url = 'https://www.hebcal.com/hebcal?v=1&cfg=json&maj=on&min=on&mod=on&nx=on&year=now&ss=on&mf=on&c=on&geo=geoname&city=BR-saopaulo&M=on&s=on'
+
+    async function fetchData() {
+        const response = await fetch(url)
+        const data = await response.json()
+
+        const MILISECONDS_IN_A_DAY = 86400000;
+        const saturday = 6;
+        const dayWeek = new Date().getDay();
+        const today = new Date().toISOString().split('T')[0];
+
+        /* Domingo (0) a Quinta (4) */
+        if ( dayWeek >= 0 && dayWeek <= 5 ){
+            const newAray = data.items.filter(({date}) => {
+                const [currentDate] = new Date(date).toISOString().split('T')
+                const futureDates = [5,6].map(day => new Date(Date.now() + (day - new Date().getDay()) * `${MILISECONDS_IN_A_DAY}`).toISOString().split('T')[0])
+                return futureDates.includes(currentDate)
+            })
+
+            function retornaCategoria (value){
+                if (value.category == "parashat")
+                return value;
+            }
+
+            var parashat = newAray.filter(retornaCategoria)
+            console.log(parashat[0].title)
+
+            const leyning = Object.entries(parashat[0].leyning)
+
+            const verse = leyning.map(([key, value], index) => {
+            if (index < 7) {
+                return { key, value }
+            }
+            })
+
+            const maftir = leyning.map(([key, value], index) => {
+            if (index == 9) {
+                return { key, value }
+            }
+            })
+
+            const completo = leyning.map(([key, value], index) => {
+            if (index == 7) {
+                return { key, value } 
+            }
+            })
+
+            const haftara = leyning.map(([key, value], index) => {
+            if (index == 8) {
+                return { key, value }
+            }
+            })
+
+            if (parashat.length > 0) {
+                
+                var parasha = document.querySelector('.leiturascompletas');
+                parasha.innerHTML = "";
+
+                var parashaname = document.querySelector('.parashaname');
+                parashaname.innerHTML = "";
+
+                var parashaheb = document.querySelector('.parashaheb');
+                parashaheb.innerHTML = "";
+
+                var hebcalverse = document.querySelector('.hebcalverse');
+                hebcalverse.innerHTML = "";
+
+                parashat.map(function(val){
+                    parashaname.innerHTML += `<p>${val.title}</p>`
+                    parashaheb.innerHTML += `<p>${val.hebrew}</p>`
+                        verse.forEach(item => {
+                            if (item) {
+                                let livro = item.value.split(' ')
+                                parasha.innerHTML += `<p>${item.key}: ${traducao[livro[0]]} ${livro[1]}</p>`
+                            }
+                        })
+                        maftir.forEach(item => {
+                            if (item) {
+                                let livro = item.value.split(' ')
+                                parasha.innerHTML += `<p>maf: ${traducao[livro[0]]} ${livro[1]}</p>`
+                            }
+                        })
+                        completo.forEach(item => {
+                            if (item) {
+                                let livro = item.value.split(' ')
+                                hebcalverse.innerHTML += `<p>${traducao[livro[0]]} ${livro[1]}</p>`
+                            }
+                        })
+                        haftara.forEach(item => {
+                            if (item) {
+                                let livro = item.value.split(' ')
+                                parasha.innerHTML += `<p>Haftarah: ${traducao[livro[0]]} ${livro[1]}</p>`
+                            }
+                        })
+
+                })
+            }
+
+        }
+            /* Sabado (6) */
+        else if ( dayWeek == 6 ) {
+            const newAray = json.items.filter(({date}) => {
+                const [currentDate] = new Date(date).toISOString().split('T')
+                const futureDates = [today]
+                return futureDates.includes(currentDate)
+            })
+        }
+        
+    }
+
+    fetchData()
+
+</script>
+</body>
+</html>

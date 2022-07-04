@@ -5,10 +5,12 @@
             <div class="completas">
                 <% for (let i = 0; i < posts.length; i++) { %>
                 <div class="box-ultima-completas">
-                    <img src="../public/images/<%= posts[i].image %>" />
+                    <img src="../public/images/<%= posts[i].image %>" alt="<%- posts[i].titulo %>"/>
                     <div class="conteudo-noticia-single">
                         <h2><%- posts[i].titulo %></h2>
-                        <p>Categoria: <%= posts[i].categoria %></p>
+                        <div class="conteudo-noticia-single-span">
+                            <span>Categoria: <%- posts[i].categoria %></span>
+                        </div>
                         <p><%- posts[i].conteudoCurto %></p>
                     </div>
                     <a href="/post/<%= posts[i].slug %>">Continue Lendo...</a>

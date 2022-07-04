@@ -178,9 +178,15 @@ section.outras-noticias {
 .ultimas {
   width: 75%;
   padding: 0 10px;
-  display: flex;
-  height: 100%;
-  flex-wrap: wrap;
+}
+
+.ultimas h1 {
+  background-color: #031d30;
+  color: white;
+  text-align: center;
+  padding: 10px 8px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 .ultimas > h2 {
@@ -197,23 +203,18 @@ section.outras-noticias {
 
 .box-ultima-single {
   margin-top: 20px;
-  margin-bottom: 20px;
-  text-align: center;
   width: 27%;
   margin-right: 3%;
   margin-left: 3%;
-  padding: 0px;
   background-color: #ffffff;
   box-shadow: 0px 1px 3px #686868;
   display: flex;
   flex-wrap: wrap;
-  align-content: space-between;
 }
 
 .box-ultima-single h2 {
   font-weight: bold;
   font-size: 20px;
-  margin-top: 0px;
 }
 
 .box-ultima-single p {
@@ -222,6 +223,7 @@ section.outras-noticias {
 
 .box-ultima-single img {
   width: 100%;
+  height: 200px;
 }
 
 .box-ultima-single a {
@@ -235,31 +237,26 @@ section.outras-noticias {
   width: 100%;
 }
 
-.ultimas h1 {
-  background-color: #031d30;
-  color: white;
-  text-align: center;
-  padding: 10px 8px;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-}
-
 .conteudo-noticia-single {
-  margin: 0 auto;
+  margin-top: 1rem;
 }
 
-.conteudo-noticia-single h2 {
-  font-size: 20px;
-  padding: 2%;
+.conteudo-noticia-single-span{
+  display: flex;
+  justify-content: center;
 }
 
-.conteudo-noticia-single p {
-  margin-left: 3%;
-  margin-right: 3%;
+.conteudo-noticia-single-span span{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
-.conteudotext {
-  padding: 20px;
+.ultimas-cards{
+  display: flex;
+  flex-direction: row;
+  max-width: 100%;
+  flex-wrap: wrap;
 }
 
 .vejamaisbutton {
@@ -505,6 +502,15 @@ section.outras-noticias {
   color: blue;
 }
 
+.movie-details span{
+  color: blue;
+  display: flex;
+}
+
+.movie-details p{
+  margin-left: 10px;
+}
+
 .page-notice-title {
   font-size: 50px;
   font-weight: bold;
@@ -549,39 +555,6 @@ section.outras-noticias {
   border-bottom: 2px solid #9fe7e7;
   display: block;
   margin-bottom: 30px;
-}
-
-/* Veja Mais */
-
-.veja-mais::after {
-  content: "";
-  width: 190px;
-  border-bottom: 2px solid #9fe7e7;
-  display: block;
-  margin-bottom: 20px;
-}
-
-.veja-mais-image {
-  width: 200px;
-  margin-bottom: 50px;
-}
-
-.veja-mais-notice {
-  max-width: 700px;
-}
-
-.veja-mais-conteudo {
-  margin-left: 20px;
-  display: flex;
-}
-
-.veja-mais-url {
-  display: flex;
-}
-
-.veja-mais-notice a {
-  text-align: center;
-  justify-content: flex-end;
 }
 
 /* Estudos */
@@ -696,14 +669,157 @@ section.outras-noticias {
   text-align: left;
   padding-bottom: 10px;
   display: flex;
-  flex-wrap: wrap;
 }
 
 .veja-mais-single img {
   width: 25%;
 }
 
-.veja-mais-single .texto-mais-lida-single {
-  width: 70%;
-  padding: 8px 20px;
+.veja-mais-single-conteudo{
+  color: black;
+}
+
+.veja-mais-single-items {
+  margin-left: 20px;
+}
+
+.veja-mais-single-items > p {
+  color: #40be65;
+}
+
+.veja-mais-single-items a {
+  margin-top: 10px;
+  display: block;
+  width: 121px;
+  height: 36px;
+  border: 1px solid #ebebeb;
+  text-decoration: none;
+  color: #0aacdc;
+  border-radius: 10px;
+  line-height: 36px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.date{
+  display: flex;
+  justify-content:start;
+  font-size: 14px;
+  font-weight: bold;
+  font-family: arial,sans-serif;
+  margin-top: 20px;
+}
+
+.date p{
+  margin-right: 10px;
+}
+
+.date img{
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+
+.hora{
+  display: flex;
+  justify-content:start;
+  font-size: 18px;
+  font-weight: bold;
+  font-family: Calibri;
+  margin-top: 20px;
+}
+
+.hora img{
+  width: 30px;
+  height: 30px;
+  margin-right: 10px
+}
+
+.horainput{
+  display: flex;
+  margin-left: 41px;
+}
+
+.hebcallogo{
+  display: flex;
+  justify-content: start;
+  margin-top: 20px;
+}
+
+.hebcallogo p{
+  font-weight: bold;
+  font-size: 18px;
+  font-family: Calibri;
+}
+
+.hebcal img{
+  width: 30px;
+  height: 30px;
+  margin-right: 10px
+}
+
+.hebcalparasha{
+  display: flex;
+  margin-left: 41px;
+}
+
+.parashaname{
+  margin-right: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  font-family: Arial;
+}
+
+.parashaheb{
+  margin-right: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  font-family: Arial;
+}
+
+.hebcalverse{
+  margin-right: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  font-family: Arial;
+  margin-left: 41px;
+}
+
+.hebcaldesc{
+  justify-content:start
+}
+
+.hebcalverse{
+  display: flex;
+}
+
+.hebcalleituras{
+  margin-left: 41px;
+}
+
+.hebcalleituras > h3{
+  display: flex;
+  font-size: 14px;
+  font-family:arial
+}
+
+.hebcalleituras p{
+  display: flex;
+  font-size: 12px;
+  font-family:arial;
+  margin: 0;
+}
+
+.informacoestitle{
+  display: flex;
+}
+
+.informacoestitle img{
+  width: 30px;
+  height: 30px;
+}
+
+.informacoes h2{
+  font-weight: bold;
+  font-family: Calibri;
 }

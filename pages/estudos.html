@@ -5,11 +5,11 @@
             <div class="completas">
                 <% for (let i = 0; i < estudos.length; i++) { %>
                 <div class="box-ultima-completas">
-                    <img src="../public/images/<%= estudos[i].image %>" />
+                    <img src="../public/images/<%= estudos[i].image %>" alt="<%- estudos[i].titulo %>"/>
                     <div class="conteudo-noticia-single">
-                        <h2 class="titulotext"><%- estudos[i].titulo %></h2>
-                        <p class="categoriatext">Categoria: <%= estudos[i].categoria %></p>
-                        <p class="conteudotext"><%- estudos[i].conteudo %></p>
+                        <h2><%- estudos[i].titulo %></h2>
+                        <p>Categoria: <%= estudos[i].categoria %></p>
+                        <p><%- estudos[i].conteudo %></p>
                     </div>
                     <a target="_blank" href="<%= estudos[i].url %>">Assistir...</a>
                 </div>

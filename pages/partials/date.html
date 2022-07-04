@@ -1,0 +1,18 @@
+<div class="date">
+
+    <img src="../../public/images/icons/calendario.png" alt="">
+    <p class="day"></p>
+
+    <script src="https://www.hebcal.com/etc/hdate-en.js">
+    </script>
+</div>
+
+<script>
+
+    var semana = ["Domingo, ", "Segunda, ", "Terça, ", "Quarta, ", "Quinta, ", "Sexta, ", "Sábado, "];
+
+    var d = new Date();
+
+    document.querySelector(".day").innerHTML = semana[d.getDay()];
+
+</script>

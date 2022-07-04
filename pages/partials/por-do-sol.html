@@ -1,0 +1,39 @@
+
+    <div class="hora">
+        <img src="../../public/images/icons/clock.png" alt="">
+        <h2>Acendimento das Velas</h2>
+    </div>
+
+    <div class="horainput">
+        <input type="text" class="city" placeholder="Digite o nome da cidade">
+        <input type="submit" value="Pesquisar" class="button">
+        <p class="pordosol"></p>
+    </div>
+
+<script>
+
+    var button = document.querySelector('.button')
+
+    button.addEventListener('click', function(){
+        var city = document.querySelector('.city').value;
+
+        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=5256b787a7141d9782a571959b5de2f3&units=metric&lang=pt_br`)
+        .then(response => response.json())
+        .then(data => {
+
+            console.log(data)
+
+            var pordosol = document.querySelector('.pordosol').innerHTML = data['sys']['sunset']
+
+        })
+
+        .catch(err =>{
+            alert("Cidade não localizada")
+        })
+
+    })
+
+</script>
+
+</body>
+</html>
