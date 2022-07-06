@@ -35,25 +35,21 @@
                         <div class="center">
                             <div class="informacoes">
                                 <h1>INFORMACÕES</h1>
-                                <div class="informacoestitle">
-                                    <img src="../public/images/icons/live.png" alt="">
-                                    <h2>Horário das transmissões</h2>
+                                <div class="informacoes-main">
+                                    <div class="informacoestitle">
+                                        <img src="../public/images/icons/live.png" alt="">
+                                        <h2>Horário das transmissões</h2>
+                                    </div>
+                                    <% for (let i = 0; i < horarios.length; i++) { %>
+                                        <div class="transmissoes">
+                                            <p class="transmissoes-title"><%= horarios[i].titulo %></p>
+                                            <p class="transmissoes-horario"><%= horarios[i].horario %></p>
+                                        </div>
+                                    <% } %>
+                                    <%- include('partials/date.html') %>
+                                    <%- include('partials/por-do-sol.html') %>
+                                    <%- include('partials/hebcal.html') %>
                                 </div>
-                                <div>
-                                    <table class="table" style="width:210px;margin: 0 auto;">
-                                        <tbody>
-                                        <% for (let i = 0; i < horarios.length; i++) { %>
-                                            <tr>
-                                            <td><%= horarios[i].titulo %></td>
-                                            <td style="width:100px"><%= horarios[i].horario %></td>
-                                            </tr>
-                                        <% } %>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <%- include('partials/date.html') %>
-                                <%- include('partials/por-do-sol.html') %>
-                                <%- include('partials/hebcal.html') %>
                             </div>
                             <div class="ultimas">
                                 <h2>POSTAGENS</h2>

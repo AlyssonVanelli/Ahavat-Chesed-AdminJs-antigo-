@@ -852,3 +852,30 @@ section.outras-noticias {
   border: none;
   box-shadow: none;
 }
+
+.transmissoes{
+  display: flex;
+  margin-left: 41px;
+  width: 200px;
+  border: 1px solid #ccc;
+}
+
+.transmissoes-title{
+  margin-right: 10px;
+  width: 110px;
+  margin: 0;
+  padding: 0;
+  border-right: 1px solid #ccc;
+}
+
+.transmissoes-horario{
+  width: 90px;
+  margin: 0;
+  padding: 0;
+}
+
+.informacoes-main{
+  display: flex;
+  flex-direction: column;
+  padding-left: 30px;
+}
