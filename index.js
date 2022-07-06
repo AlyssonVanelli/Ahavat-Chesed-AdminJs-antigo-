@@ -210,72 +210,69 @@ app.get("/", (req, res) => {
           };
         });
 
-        Destaques.find({})
-          .sort({ _id: -1 })
-          .exec(function (err, destaques) {
-            destaques = destaques.map(function (val) {
-              return {
-                titulo: val.titulo,
-                image: val.image,
-                conteudo: val.conteudo,
-                conteudoCurto: val.conteudoCurto,
-                slug: val.slug,
-                categoria: val.categoria,
-              };
-            });
-
-            Posts.find({})
-              .sort({ _id: -1 })
-              .limit(3)
-              .exec(function (err, ultimas) {
-                ultimas = ultimas.map(function (val) {
-                  return {
-                    titulo: val.titulo,
-                    image: val.image,
-                    conteudo: val.conteudo,
-                    conteudoCurto: val.conteudoCurto,
-                    slug: val.slug,
-                    categoria: val.categoria,
-                  };
-                });
-
-                Noticias.find({})
-                  .sort({ _id: -1 })
-                  .limit(6)
-                  .exec(function (err, noticias) {
-                    noticias = noticias.map(function (val) {
-                      return {
-                        titulo: val.titulo,
-                        image: val.image,
-                        conteudo: val.conteudo,
-                        conteudoCurto: val.conteudoCurto,
-                        slug: val.slug,
-                        categoria: val.categoria,
-                      };
-                    });
-
-                    Horarios.find({})
-                      .sort({ _id: 1 })
-                      .exec(function (err, horarios) {
-                        horarios = horarios.map(function (val) {
-                          return {
-                            titulo: val.titulo,
-                            horario: val.horario,
-                          };
-                        });
-
-                        res.render("home", {
-                          posts: posts,
-                          destaques: destaques,
-                          ultimas: ultimas,
-                          noticias: noticias,
-                          horarios: horarios,
-                        });
-                      });
-                  });
-              });
+      Destaques.find({})
+        .sort({ _id: -1 })
+        .exec(function (err, destaques) {
+          destaques = destaques.map(function (val) {
+            return {
+              titulo: val.titulo,
+              image: val.image,
+              conteudo: val.conteudo,
+              conteudoCurto: val.conteudoCurto,
+              slug: val.slug,
+              categoria: val.categoria,
+            };
           });
-      });
+
+      Posts.find({})
+        .sort({ _id: -1 })
+        .limit(3)
+        .exec(function (err, ultimas) {
+          ultimas = ultimas.map(function (val) {
+            return {
+              titulo: val.titulo,
+              image: val.image,
+              conteudo: val.conteudo,
+              conteudoCurto: val.conteudoCurto,
+              slug: val.slug,
+              categoria: val.categoria,
+            };
+          });
+
+      Noticias.find({})
+        .sort({ _id: -1 })
+        .limit(6)
+        .exec(function (err, noticias) {
+          noticias = noticias.map(function (val) {
+            return {
+              titulo: val.titulo,
+              image: val.image,
+              conteudo: val.conteudo,
+              conteudoCurto: val.conteudoCurto,
+              slug: val.slug,
+              categoria: val.categoria,
+            };
+          });
+
+      Horarios.find({})
+        .sort({ _id: 1 })
+        .exec(function (err, horarios) {
+          horarios = horarios.map(function (val) {
+            return {
+              titulo: val.titulo,
+              horario: val.horario,
+            };
+          });
+
+          res.render("home", {
+            posts: posts,
+            destaques: destaques,
+            ultimas: ultimas,
+            noticias: noticias,
+            horarios: horarios,
+          });
+        });});});});});
+
   } else {
     Posts.find(
       { titulo: { $regex: req.query.busca, $options: "i" } },
@@ -290,10 +287,26 @@ app.get("/", (req, res) => {
             categoria: val.categoria,
           };
         });
-        res.render("busca", { posts: posts, contagem: posts.length });
+
+    Noticias.find(
+      { titulo: { $regex: req.query.busca, $options: "i" } },
+      function (err, noticias) {
+        noticias = noticias.map(function (val) {
+          return {
+            titulo: val.titulo,
+            conteudo: val.conteudo,
+            descricaoCurta: val.conteudoCurto,
+            image: val.image,
+            slug: val.slug,
+            categoria: val.categoria,
+          };
+        });
+
+        res.render("busca", { posts: posts, contagem: posts.length , noticias: noticias, contagem2: noticias.length});
       }
     );
   }
+    )};
 });
 
 app.get("/postagens", (req, res) => {
@@ -399,7 +412,7 @@ app.get("/noticia/:slug", (req, res) => {
     { new: true },
     function (err, noticia) {
       if (noticia != null) {
-        Posts.find({})
+        Noticias.find({})
           .sort({ _id: -1 })
           .limit(3)
           .exec(function (err, ultimas) {

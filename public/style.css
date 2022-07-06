@@ -704,7 +704,7 @@ section.outras-noticias {
 .date{
   display: flex;
   justify-content:start;
-  font-size: 14px;
+  font-size: 18px;
   font-weight: bold;
   font-family: arial,sans-serif;
   margin-top: 20px;
@@ -738,6 +738,11 @@ section.outras-noticias {
 .horainput{
   display: flex;
   margin-left: 41px;
+  align-items: baseline;
+}
+
+.horainput p{
+  font-size: 24px;
 }
 
 .hebcallogo{
@@ -748,7 +753,7 @@ section.outras-noticias {
 
 .hebcallogo p{
   font-weight: bold;
-  font-size: 18px;
+  font-size: 25px;
   font-family: Calibri;
 }
 
@@ -812,6 +817,7 @@ section.outras-noticias {
 
 .informacoestitle{
   display: flex;
+  align-items: center;
 }
 
 .informacoestitle img{
@@ -822,4 +828,27 @@ section.outras-noticias {
 .informacoes h2{
   font-weight: bold;
   font-family: Calibri;
+  font-size: 25px;
+}
+
+.leiturascompletas p{
+  font-size: 14px;
+}
+
+.hebcalleituras p{
+  font-size: 14px;
+}
+
+.city{
+  width:200px;
+}
+
+#search-form2 {
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+#search-form2 .form-control {
+  border: none;
+  box-shadow: none;
 }

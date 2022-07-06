@@ -1,0 +1,14 @@
+<div class="vejamaiscards">
+    <% for(let i = 0; i < ultimas.length; i++) { %>
+        <div class="veja-mais-single">
+            <img src="../public/images/<%= ultimas[i].image %>" />
+            <div class="veja-mais-single-items">
+                <p><%- ultimas[i].titulo %></p>
+                <div>
+                    <p><%- ultimas[i].conteudoCurto %></p>
+                </div>
+                <a href="<%= ultimas[i].slug %>">Ler mais...</a>
+            </div>
+        </div>
+    <% } %>
+</div>
