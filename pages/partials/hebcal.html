@@ -3,7 +3,7 @@
     <div class="hebcal">
         <div class="hebcallogo">    
             <img src="../../public/images/icons/tora.png" alt="">
-            <p>Parashá da Semana</p>
+            <h2>Parashá da Semana</h2>
         </div>
         <div class="hebcaldesc">
             <div class="hebcalparasha">
@@ -32,7 +32,8 @@
         "Leviticus": "Leviticus",
         "Numbers": "Números",
         "Deuteronomy": "Deuteronomy",
-        "Judges": "Juízes"
+        "Judges": "Juízes",
+        "Micah": "Miquéias"
     }
 
     const url = 'https://www.hebcal.com/hebcal?v=1&cfg=json&maj=on&min=on&mod=on&nx=on&year=now&ss=on&mf=on&c=on&geo=geoname&city=BR-saopaulo&M=on&s=on'
@@ -134,13 +135,94 @@
             }
 
         }
-            /* Sabado (6) */
+        
+        /* Sabado (6) */
         else if ( dayWeek == 6 ) {
-            const newAray = json.items.filter(({date}) => {
+            const newAray = data.items.filter(({date}) => {
                 const [currentDate] = new Date(date).toISOString().split('T')
                 const futureDates = [today]
                 return futureDates.includes(currentDate)
             })
+
+            function retornaCategoria (value){
+                if (value.category == "parashat")
+                return value;
+            }
+
+            var parashat = newAray.filter(retornaCategoria)
+            //console.log(parashat)
+
+            const leyning = Object.entries(parashat[0].leyning)
+
+            const verse = leyning.map(([key, value], index) => {
+            if (index < 7) {
+                return { key, value }
+            }
+            })
+
+            const maftir = leyning.map(([key, value], index) => {
+            if (index == 9) {
+                return { key, value }
+            }
+            })
+
+            const completo = leyning.map(([key, value], index) => {
+            if (index == 7) {
+                return { key, value } 
+            }
+            })
+
+            const haftara = leyning.map(([key, value], index) => {
+            if (index == 8) {
+                return { key, value }
+            }
+            })
+
+            if (parashat.length > 0) {
+                
+                var parasha = document.querySelector('.leiturascompletas');
+                parasha.innerHTML = "";
+
+                var parashaname = document.querySelector('.parashaname');
+                parashaname.innerHTML = "";
+
+                var parashaheb = document.querySelector('.parashaheb');
+                parashaheb.innerHTML = "";
+
+                var hebcalverse = document.querySelector('.hebcalverse');
+                hebcalverse.innerHTML = "";
+
+                parashat.map(function(val){
+                    parashaname.innerHTML += `<p>${val.title}</p>`
+                    parashaheb.innerHTML += `<p>${val.hebrew}</p>`
+                        verse.forEach(item => {
+                            if (item) {
+                                let livro = item.value.split(' ')
+                                parasha.innerHTML += `<p>${item.key}: ${traducao[livro[0]]} ${livro[1]}</p>`
+                            }
+                        })
+                        maftir.forEach(item => {
+                            if (item) {
+                                let livro = item.value.split(' ')
+                                parasha.innerHTML += `<p>maf: ${traducao[livro[0]]} ${livro[1]}</p>`
+                            }
+                        })
+                        completo.forEach(item => {
+                            if (item) {
+                                let livro = item.value.split(' ')
+                                hebcalverse.innerHTML += `<p>${traducao[livro[0]]} ${livro[1]}</p>`
+                            }
+                        })
+                        haftara.forEach(item => {
+                            if (item) {
+                                let livro = item.value.split(' ')
+                                parasha.innerHTML += `<p>Haftarah: ${traducao[livro[0]]} ${livro[1]}</p>`
+                            }
+                        })
+
+                })
+            }
+
         }
         
     }

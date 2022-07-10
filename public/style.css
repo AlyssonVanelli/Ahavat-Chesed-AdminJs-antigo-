@@ -86,39 +86,7 @@ body {
 }
 
 .img-destaque img {
-  height: 450px;
-}
-
-.title-destaque-descricao h2 {
-  position: absolute;
-  top: 10%;
-  left: 50%;
-  color: white;
-  z-index: 2;
-  text-align: center;
-  transform: translate(-50%, -50%);
-}
-
-.title-destaque-descricao p {
-  position: absolute;
-  bottom: 0;
-  left: 20%;
-  padding: 10px;
-  color: white;
-  background-color: #031d30;
-  z-index: 2;
-  text-align: center;
-}
-
-.overlay-destaque {
-  position: absolute;
-  left: 0;
-  top: 0;
-  border-radius: 20px;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
-  z-index: 1;
+  height: 500px;
 }
 
 /* Informações */
@@ -610,7 +578,7 @@ section.outras-noticias {
 }
 
 .mais-lidas > h3 {
-  background-color: #3f51b5;
+  background-color: #031d30;
   color: white;
   text-align: center;
   padding: 10px 8px;
@@ -817,7 +785,6 @@ section.outras-noticias {
 
 .informacoestitle{
   display: flex;
-  align-items: center;
 }
 
 .informacoestitle img{
@@ -878,4 +845,147 @@ section.outras-noticias {
   display: flex;
   flex-direction: column;
   padding-left: 30px;
+}
+
+.collapse{
+  z-index: 1000;
+  padding: 10px;
+  background-color: #031d30;
+}
+
+.btn-outline-success{
+  color: white;
+}
+
+.navbar-toggler i {
+  color: white
+}
+
+@media (max-width: 1280px)
+{
+  .box-ultima-single{
+    width: 44%;
+  }
+
+}
+
+@media (max-width: 414px)
+{
+  .ultimas {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .informacoes{
+    display: inline;
+    position: initial;
+    width: 100%;
+
+  }
+
+  .box-ultima-single{
+    width: 100%;
+  }
+
+  .horainput{
+    display: inline;
+    margin-left: 41px;
+  }
+
+  .horainput p{
+    text-align: end;
+  }
+
+  .img-destaque img {
+    height: 200px;
+  }
+
+  .box-ultima-completas{
+    width: 100%;
+  }
+
+  .movie-image-container{
+    height: auto;
+    max-width: 100%;
+  }
+
+  .page-notice-title{
+    font-size: 30px;
+  }
+
+  .veja-mais-single{
+    display: inline;
+    margin-bottom: 20px;
+  }
+
+  .veja-mais-single img{
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .veja-mais-single-items a{
+    background-color: #031d30;
+    text-decoration: none;
+    color: #0aacdc;
+  }
+
+  .movie-container::after{
+    width: 100%
+  }
+
+  .movie-description-container::before{
+    width: 100%
+  }
+
+  .logosbancos{
+    display: inline;
+  }
+
+  .cardbancos{
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+  }
+
+  .cardbancos img{
+    margin: 0 auto;
+  }
+
+  #bb, #itau, #inter, #pix{
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  
+  #caixa {
+    margin-bottom: 10px;
+  }
+
+  #contribua h2{
+    margin-top: 20px;
+    margin-bottom: 0px;
+  }
+
+  .informacoes-main{
+    padding-left: 15px;
+  }
+
+  .collapse{
+    margin-left: 40%;
+  }
+
+  .mais-lida-noticia-single img{
+    width: 100%;
+  }
+
+  .mais-lida-noticia-single .texto-mais-lida-single{
+    width: 100%;
+    box-shadow: 0px 1px 3px #686868;
+  }
+
+  .texto-mais-lida-single a{
+    background-color: #031d30;
+    text-decoration: none;
+    color: #0aacdc;
+  }
+
 }

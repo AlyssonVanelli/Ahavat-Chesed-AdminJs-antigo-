@@ -8,8 +8,6 @@
                     <div class="carousel-inner">
                         <% for (let i = 0; i < destaques.length; i++) { %>
                             <div class="carousel-item active" data-bs-interval="5000">
-                                <h2><%= destaques[i].titulo %></h2>
-                                <p><%= destaques[i].conteudo %></p>
                                 <img src="../public/images/<%= destaques[i].image %>" class="d-block w-100" alt="<%= destaques[i].titulo %>">
                             </div>
                         <% } %>

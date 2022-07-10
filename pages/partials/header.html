@@ -19,15 +19,18 @@
 </head>
 <body class="site">
   <header>
+
     <nav id="main-navbar" class="navbar navbar-expand-lg">
-      <a href="/">
-        <img src="../../public/images/logo.png" alt="AhavatChessed" id="logo" title=" Sinagoga Ahavat Chessed">
-      </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
-        <i class="fas fa-bars"></i>
-      </button>
-      <div class="collapse navbar-collapse" id="navbar">
-        <ul class="navbar-nav">
+      <div class="container-fluid">
+        <a href="/">
+          <img src="../../public/images/logo.png" alt="AhavatChessed" id="logo" title=" Sinagoga Ahavat Chessed">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="fas fa-bars"></i>
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarScroll">
+          <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: auto;">
             <li class="nav-item">
               <a href="/" class="nav-link">Inicio</a>
             </li>
@@ -49,13 +52,15 @@
             <li class="nav-item">
               <a href="/faleConosco" class="nav-link">Fale Conosco</a>
             </li>
-        </ul>
+          </ul>
+          <form class="d-flex" role="search" >
+            <input class="form-control me-2" name="busca" type="search" placeholder="Buscar..." aria-label="Search">
+            <button class="btn btn-outline-success" type="submit"><i class="fa fa-search"></i></button>
+          </form>
+        </div>
       </div>
-      <form id="search-form" class="form-inline my-2 my-lg-0">
-        <input type="text" name="busca" id="search" class="form-control mr-sm-2" type="search" placeholder="Buscar..." aria-label="Search">
-        <button class="btn my-2 my-sm-0" type="submit">
-          <i class="fas fa-search"></i>
-        </button>
-      </form>
     </nav>
+
+
+
   </header>
