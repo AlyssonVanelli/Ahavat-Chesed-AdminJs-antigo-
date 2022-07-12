@@ -5,17 +5,20 @@
             <div class="completas">
                 <% for (let i=0; i < posts.length; i++) { %>
                     <div class="box-ultima-completas">
-                        <a href="/post/<%= posts[i].slug %>" class="Linktext"><img
-                                src="../public/images/<%= posts[i].image %>" alt="<%- posts[i].titulo %>" /></a>
+                        <div class="imgcategory">
+                            <a href="/post/<%= posts[i].slug %>" class="Linktext"><img
+                                    src="../public/images/<%= posts[i].image %>" alt="<%- posts[i].titulo %>" />
+                                <div class="category-img">
+                                    <%- posts[i].categoria %>
+                                </div>
+                            </a>
+                        </div>
                         <div class="conteudo-noticia-single">
                             <a href="/post/<%= posts[i].slug %>" class="Linktext">
                                 <h2>
                                     <%- posts[i].titulo %>
                                 </h2>
                             </a>
-                            <div class="conteudo-noticia-single-span">
-                                <span>Categoria: <%- posts[i].categoria %></span>
-                            </div>
                             <a href="/post/<%= posts[i].slug %>" class="Linktext">
                                 <p>
                                     <%- posts[i].conteudoCurto %>

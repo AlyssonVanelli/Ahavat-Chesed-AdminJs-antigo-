@@ -15,6 +15,7 @@ const Estudos = require("./models/Estudos.js");
 const Noticias = require("./models/Noticias.js");
 const Horarios = require("./models/Horarios.js");
 const Users = require("./models/Users.js");
+const CategoriaNoticias = require("./models/CategoriasNoticias");
 
 const app = express();
 
@@ -315,130 +316,418 @@ app.get("/", (req, res) => {
 });
 
 app.get("/postagens", (req, res) => {
-  Posts.find({})
-    .sort({ _id: -1 })
-    .exec(function (err, posts) {
-      posts = posts.map(function (val) {
-        return {
-          titulo: val.titulo,
-          image: val.image,
-          conteudo: val.conteudo,
-          conteudoCurto: val.conteudoCurto,
-          slug: val.slug,
-          categoria: val.categoria,
-        };
+  if (req.query.busca == null) {
+    Posts.find({})
+      .sort({ _id: -1 })
+      .exec(function (err, posts) {
+        posts = posts.map(function (val) {
+          return {
+            titulo: val.titulo,
+            image: val.image,
+            conteudo: val.conteudo,
+            conteudoCurto: val.conteudoCurto,
+            slug: val.slug,
+            categoria: val.categoria,
+          };
+        });
+        res.render("postagens", { posts: posts });
       });
-      res.render("postagens", { posts: posts });
-    });
+  } else {
+    Posts.find(
+      { titulo: { $regex: req.query.busca, $options: "i" } },
+      function (err, posts) {
+        posts = posts.map(function (val) {
+          return {
+            titulo: val.titulo,
+            conteudo: val.conteudo,
+            descricaoCurta: val.conteudoCurto,
+            image: val.image,
+            slug: val.slug,
+            categoria: val.categoria,
+          };
+        });
+
+        Noticias.find(
+          { titulo: { $regex: req.query.busca, $options: "i" } },
+          function (err, noticias) {
+            noticias = noticias.map(function (val) {
+              return {
+                titulo: val.titulo,
+                conteudo: val.conteudo,
+                descricaoCurta: val.conteudoCurto,
+                image: val.image,
+                slug: val.slug,
+                categoria: val.categoria,
+              };
+            });
+
+            res.render("busca", { posts: posts, contagem: posts.length, noticias: noticias, contagem2: noticias.length });
+          }
+        );
+      }
+    )
+  }
 });
 
 app.get("/noticias", (req, res) => {
-  Noticias.find({})
-    .sort({ _id: -1 })
-    .exec(function (err, noticias) {
-      noticias = noticias.map(function (val) {
-        return {
-          titulo: val.titulo,
-          image: val.image,
-          conteudo: val.conteudo,
-          conteudoCurto: val.conteudoCurto,
-          slug: val.slug,
-          categoria: val.categoria,
-        };
+  if (req.query.busca == null) {
+    Noticias.find({})
+      .sort({ _id: -1 })
+      .exec(function (err, noticias) {
+        noticias = noticias.map(function (val) {
+          return {
+            titulo: val.titulo,
+            image: val.image,
+            conteudo: val.conteudo,
+            conteudoCurto: val.conteudoCurto,
+            slug: val.slug,
+            categoria: val.categoria,
+          };
+        });
+        res.render("noticias", { noticias: noticias });
       });
-      res.render("noticias", { noticias: noticias });
-    });
+  } else {
+    Posts.find(
+      { titulo: { $regex: req.query.busca, $options: "i" } },
+      function (err, posts) {
+        posts = posts.map(function (val) {
+          return {
+            titulo: val.titulo,
+            conteudo: val.conteudo,
+            descricaoCurta: val.conteudoCurto,
+            image: val.image,
+            slug: val.slug,
+            categoria: val.categoria,
+          };
+        });
+
+        Noticias.find(
+          { titulo: { $regex: req.query.busca, $options: "i" } },
+          function (err, noticias) {
+            noticias = noticias.map(function (val) {
+              return {
+                titulo: val.titulo,
+                conteudo: val.conteudo,
+                descricaoCurta: val.conteudoCurto,
+                image: val.image,
+                slug: val.slug,
+                categoria: val.categoria,
+              };
+            });
+
+            res.render("busca", { posts: posts, contagem: posts.length, noticias: noticias, contagem2: noticias.length });
+          }
+        );
+      }
+    )
+  }
 });
 
 app.get("/contribua", (req, res) => {
-  res.render("contribua", {});
+  if (req.query.busca == null) {
+    res.render("contribua", {});
+  } else {
+    Posts.find(
+      { titulo: { $regex: req.query.busca, $options: "i" } },
+      function (err, posts) {
+        posts = posts.map(function (val) {
+          return {
+            titulo: val.titulo,
+            conteudo: val.conteudo,
+            descricaoCurta: val.conteudoCurto,
+            image: val.image,
+            slug: val.slug,
+            categoria: val.categoria,
+          };
+        });
+
+        Noticias.find(
+          { titulo: { $regex: req.query.busca, $options: "i" } },
+          function (err, noticias) {
+            noticias = noticias.map(function (val) {
+              return {
+                titulo: val.titulo,
+                conteudo: val.conteudo,
+                descricaoCurta: val.conteudoCurto,
+                image: val.image,
+                slug: val.slug,
+                categoria: val.categoria,
+              };
+            });
+
+            res.render("busca", { posts: posts, contagem: posts.length, noticias: noticias, contagem2: noticias.length });
+          }
+        );
+      }
+    )
+  }
 });
 
 app.get("/sobre", (req, res) => {
-  res.render("sobre", {});
+  if (req.query.busca == null) {
+    res.render("sobre", {});
+  } else {
+    Posts.find(
+      { titulo: { $regex: req.query.busca, $options: "i" } },
+      function (err, posts) {
+        posts = posts.map(function (val) {
+          return {
+            titulo: val.titulo,
+            conteudo: val.conteudo,
+            descricaoCurta: val.conteudoCurto,
+            image: val.image,
+            slug: val.slug,
+            categoria: val.categoria,
+          };
+        });
+
+        Noticias.find(
+          { titulo: { $regex: req.query.busca, $options: "i" } },
+          function (err, noticias) {
+            noticias = noticias.map(function (val) {
+              return {
+                titulo: val.titulo,
+                conteudo: val.conteudo,
+                descricaoCurta: val.conteudoCurto,
+                image: val.image,
+                slug: val.slug,
+                categoria: val.categoria,
+              };
+            });
+
+            res.render("busca", { posts: posts, contagem: posts.length, noticias: noticias, contagem2: noticias.length });
+          }
+        );
+      }
+    )
+  }
 });
 
 app.get("/estudos", (req, res) => {
-  Estudos.find({})
-    .sort({ _id: -1 })
-    .exec(function (err, estudos) {
-      estudos = estudos.map(function (val) {
-        return {
-          titulo: val.titulo,
-          image: val.image,
-          conteudo: val.conteudo,
-          conteudoCurto: val.conteudoCurto,
-          url: val.url,
-          categoria: val.categoria,
-        };
-      });
+  if (req.query.busca == null) {
+    Estudos.find({})
+      .sort({ _id: -1 })
+      .exec(function (err, estudos) {
+        estudos = estudos.map(function (val) {
+          return {
+            titulo: val.titulo,
+            image: val.image,
+            conteudo: val.conteudo,
+            conteudoCurto: val.conteudoCurto,
+            url: val.url,
+            categoria: val.categoria,
+          };
+        });
 
-      res.render("estudos", { estudos: estudos });
-    });
+        res.render("estudos", { estudos: estudos });
+      });
+  } else {
+    Posts.find(
+      { titulo: { $regex: req.query.busca, $options: "i" } },
+      function (err, posts) {
+        posts = posts.map(function (val) {
+          return {
+            titulo: val.titulo,
+            conteudo: val.conteudo,
+            descricaoCurta: val.conteudoCurto,
+            image: val.image,
+            slug: val.slug,
+            categoria: val.categoria,
+          };
+        });
+
+        Noticias.find(
+          { titulo: { $regex: req.query.busca, $options: "i" } },
+          function (err, noticias) {
+            noticias = noticias.map(function (val) {
+              return {
+                titulo: val.titulo,
+                conteudo: val.conteudo,
+                descricaoCurta: val.conteudoCurto,
+                image: val.image,
+                slug: val.slug,
+                categoria: val.categoria,
+              };
+            });
+
+            res.render("busca", { posts: posts, contagem: posts.length, noticias: noticias, contagem2: noticias.length });
+          }
+        );
+      }
+    )
+  }
 });
 
 app.get("/faleconosco", (req, res) => {
-  res.render("faleConosco");
+  if (req.query.busca == null) {
+    res.render("faleConosco");
+  } else {
+    Posts.find(
+      { titulo: { $regex: req.query.busca, $options: "i" } },
+      function (err, posts) {
+        posts = posts.map(function (val) {
+          return {
+            titulo: val.titulo,
+            conteudo: val.conteudo,
+            descricaoCurta: val.conteudoCurto,
+            image: val.image,
+            slug: val.slug,
+            categoria: val.categoria,
+          };
+        });
+
+        Noticias.find(
+          { titulo: { $regex: req.query.busca, $options: "i" } },
+          function (err, noticias) {
+            noticias = noticias.map(function (val) {
+              return {
+                titulo: val.titulo,
+                conteudo: val.conteudo,
+                descricaoCurta: val.conteudoCurto,
+                image: val.image,
+                slug: val.slug,
+                categoria: val.categoria,
+              };
+            });
+
+            res.render("busca", { posts: posts, contagem: posts.length, noticias: noticias, contagem2: noticias.length });
+          }
+        );
+      }
+    )
+  }
 });
 
 app.get("/post/:slug", (req, res) => {
-  Posts.findOneAndUpdate(
-    { slug: req.params.slug },
-    { new: true },
-    function (err, resposta) {
-      if (resposta != null) {
-        Posts.find({})
-          .sort({ _id: -1 })
-          .limit(3)
-          .exec(function (err, ultimas) {
-            ultimas = ultimas.map(function (val) {
+  if (req.query.busca == null) {
+    Posts.findOneAndUpdate(
+      { slug: req.params.slug },
+      { new: true },
+      function (err, resposta) {
+        if (resposta != null) {
+          Posts.find({})
+            .sort({ _id: -1 })
+            .limit(3)
+            .exec(function (err, ultimas) {
+              ultimas = ultimas.map(function (val) {
+                return {
+                  titulo: val.titulo,
+                  image: val.image,
+                  conteudo: val.conteudo,
+                  conteudoCurto: val.conteudoCurto,
+                  slug: val.slug,
+                  categoria: val.categoria,
+                };
+              });
+
+              res.render("single", { noticia: resposta, ultimas: ultimas });
+            });
+        } else {
+          res.redirect("/");
+        }
+      }
+    );
+  } else {
+    Posts.find(
+      { titulo: { $regex: req.query.busca, $options: "i" } },
+      function (err, posts) {
+        posts = posts.map(function (val) {
+          return {
+            titulo: val.titulo,
+            conteudo: val.conteudo,
+            descricaoCurta: val.conteudoCurto,
+            image: val.image,
+            slug: val.slug,
+            categoria: val.categoria,
+          };
+        });
+
+        Noticias.find(
+          { titulo: { $regex: req.query.busca, $options: "i" } },
+          function (err, noticias) {
+            noticias = noticias.map(function (val) {
               return {
                 titulo: val.titulo,
-                image: val.image,
                 conteudo: val.conteudo,
-                conteudoCurto: val.conteudoCurto,
+                descricaoCurta: val.conteudoCurto,
+                image: val.image,
                 slug: val.slug,
                 categoria: val.categoria,
               };
             });
 
-            res.render("single", { noticia: resposta, ultimas: ultimas });
-          });
-      } else {
-        res.redirect("/");
+            res.render("busca", { posts: posts, contagem: posts.length, noticias: noticias, contagem2: noticias.length });
+          }
+        );
       }
-    }
-  );
+    )
+  }
 });
 
 app.get("/noticia/:slug", (req, res) => {
-  Noticias.findOneAndUpdate(
-    { slug: req.params.slug },
-    { new: true },
-    function (err, noticia) {
-      if (noticia != null) {
-        Noticias.find({})
-          .sort({ _id: -1 })
-          .limit(3)
-          .exec(function (err, ultimas) {
-            ultimas = ultimas.map(function (val) {
+  if (req.query.busca == null) {
+    Noticias.findOneAndUpdate(
+      { slug: req.params.slug },
+      { new: true },
+      function (err, noticia) {
+        if (noticia != null) {
+          Noticias.find({})
+            .sort({ _id: -1 })
+            .limit(3)
+            .exec(function (err, ultimas) {
+              ultimas = ultimas.map(function (val) {
+                return {
+                  titulo: val.titulo,
+                  image: val.image,
+                  conteudo: val.conteudo,
+                  conteudoCurto: val.conteudoCurto,
+                  slug: val.slug,
+                  categoria: val.categoria,
+                };
+              });
+
+              res.render("singleNoticia", { noticia: noticia, ultimas: ultimas });
+            });
+        } else {
+          res.redirect("/");
+        }
+      }
+    );
+  } else {
+    Posts.find(
+      { titulo: { $regex: req.query.busca, $options: "i" } },
+      function (err, posts) {
+        posts = posts.map(function (val) {
+          return {
+            titulo: val.titulo,
+            conteudo: val.conteudo,
+            descricaoCurta: val.conteudoCurto,
+            image: val.image,
+            slug: val.slug,
+            categoria: val.categoria,
+          };
+        });
+
+        Noticias.find(
+          { titulo: { $regex: req.query.busca, $options: "i" } },
+          function (err, noticias) {
+            noticias = noticias.map(function (val) {
               return {
                 titulo: val.titulo,
-                image: val.image,
                 conteudo: val.conteudo,
-                conteudoCurto: val.conteudoCurto,
+                descricaoCurta: val.conteudoCurto,
+                image: val.image,
                 slug: val.slug,
                 categoria: val.categoria,
               };
             });
 
-            res.render("singleNoticia", { noticia: noticia, ultimas: ultimas });
-          });
-      } else {
-        res.redirect("/");
+            res.render("busca", { posts: posts, contagem: posts.length, noticias: noticias, contagem2: noticias.length });
+          }
+        );
       }
-    }
-  );
+    )
+  }
 });
 
 app.listen(5000, () => {

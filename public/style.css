@@ -178,6 +178,7 @@ section.outras-noticias {
   box-shadow: 0px 1px 3px #686868;
   display: flex;
   flex-wrap: wrap;
+  align-content: space-between;
 }
 
 .box-ultima-single h2 {
@@ -203,6 +204,7 @@ section.outras-noticias {
   font-size: 19px;
   align-self: flex-end;
   width: 100%;
+  font-weight: bold;
 }
 
 .gotonotice:hover {
@@ -866,6 +868,20 @@ section.outras-noticias {
 
 .Linktext:hover {
   text-decoration: none;
+}
+
+.imgcategory {
+  position: relative;
+  margin-bottom: 0;
+}
+
+.category-img > p {
+  font-weight: bold;
+  position: absolute;
+  bottom: 0;
+  background-color: #031d30;
+  color: white !important;
+  margin-bottom: 0;
 }
 
 @media (max-width: 1280px) {

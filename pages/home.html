@@ -60,20 +60,21 @@
                                 <div class="ultimas-cards">
                                     <% for (let i=0; i < posts.length; i++) { %>
                                         <div class="box-ultima-single">
-                                            <a href="/post/<%= posts[i].slug %>"><img
-                                                    src="../public/images/<%= posts[i].image %>"
-                                                    alt="<%- posts[i].titulo %>" /></a>
+                                            <div class="imgcategory">
+                                                <a href="/post/<%= posts[i].slug %>"><img
+                                                        src="../public/images/<%= posts[i].image %>"
+                                                        alt="<%- posts[i].titulo %>" />
+                                                    <div class="category-img">
+                                                        <%- posts[i].categoria %>
+                                                    </div>
+                                                </a>
+                                            </div>
                                             <div class="conteudo-noticia-single">
                                                 <a href="/post/<%= posts[i].slug %>" class="Linktext">
                                                     <h2>
                                                         <%- posts[i].titulo %>
                                                     </h2>
                                                 </a>
-                                                <div class="conteudo-noticia-single-span">
-                                                    Categoria:<span>
-                                                        <%- posts[i].categoria %>
-                                                    </span>
-                                                </div>
                                                 <a href="/post/<%= posts[i].slug %>" class="Linktext">
                                                     <p>
                                                         <%- posts[i].conteudoCurto %>
@@ -92,18 +93,21 @@
                                 <div class="ultimas-cards">
                                     <% for (let i=0; i < noticias.length; i++) { %>
                                         <div class="box-ultima-single">
-                                            <a href="/noticia/<%= noticias[i].slug %>" class="Linktext"><img
-                                                    src="../public/images/<%= noticias[i].image %>"
-                                                    alt="<%- noticias[i].titulo %>" /></a>
+                                            <div class="imgcategory">
+                                                <a href="/noticia/<%= noticias[i].slug %>" class="Linktext"><img
+                                                        src="../public/images/<%= noticias[i].image %>"
+                                                        alt="<%- noticias[i].titulo %>" />
+                                                    <div class="category-img">
+                                                        <%- noticias[i].categoria %>
+                                                    </div>
+                                                </a>
+                                            </div>
                                             <div class="conteudo-noticia-single">
                                                 <a href="/noticia/<%= noticias[i].slug %>" class="Linktext">
                                                     <h2>
                                                         <%- noticias[i].titulo %>
                                                     </h2>
                                                 </a>
-                                                <div class="conteudo-noticia-single-span">
-                                                    <span>Categoria: <%- noticias[i].categoria %></span>
-                                                </div>
                                                 <a href="/noticia/<%= noticias[i].slug %>" class="Linktext">
                                                     <p>
                                                         <%- noticias[i].conteudoCurto %>
