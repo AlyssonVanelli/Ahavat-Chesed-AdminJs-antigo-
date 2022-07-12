@@ -1,28 +1,26 @@
+<div class="hebcal">
+    <div class="hebcallogo">
+        <img src="../../public/images/icons/tora.png" alt="">
+        <h2>Parashá da Semana</h2>
+    </div>
+    <div class="hebcaldesc">
+        <div class="hebcalparasha">
+            <div class="parashaname">
 
-
-    <div class="hebcal">
-        <div class="hebcallogo">    
-            <img src="../../public/images/icons/tora.png" alt="">
-            <h2>Parashá da Semana</h2>
-        </div>
-        <div class="hebcaldesc">
-            <div class="hebcalparasha">
-                <div class="parashaname">
-
-                </div>
-                <div class="parashaheb">
-                    
-                </div>
             </div>
-            <div class="hebcalverse"></div>
-        </div>
-    </div>
-    <div class="hebcalleituras">
-        <h3>Leituras:</h3>
-        <div class="leiturascompletas">
+            <div class="parashaheb">
 
+            </div>
         </div>
+        <div class="hebcalverse"></div>
     </div>
+</div>
+<div class="hebcalleituras">
+    <h3>Leituras:</h3>
+    <div class="leiturascompletas">
+
+    </div>
+</div>
 
 <script>
 
@@ -33,7 +31,23 @@
         "Numbers": "Números",
         "Deuteronomy": "Deuteronomy",
         "Judges": "Juízes",
-        "Micah": "Miquéias"
+        "Micah": "Miquéias",
+        "Isaiah": "Isaías",
+        "I Samuel": "I Samuel",
+        "II Samuel": "II Samuel",
+        "Joshua": "Josué",
+        "I Kings": "I Reis",
+        "II Kings": "II Reis",
+        "Malachi": "Malaquias",
+        "Hosea": "Oséias",
+        "Zechariah": "Zacarias",
+        "Obadiah": "Obadias",
+        "Jeremiah": "Jeremias",
+        "Amos": "Amos",
+        "Ezekiel": "Ezequiel",
+        "Haggai": "Ageu",
+        "Nachum": "Naum",
+        "Joel": "Joel",
     }
 
     const url = 'https://www.hebcal.com/hebcal?v=1&cfg=json&maj=on&min=on&mod=on&nx=on&year=now&ss=on&mf=on&c=on&geo=geoname&city=BR-saopaulo&M=on&s=on'
@@ -48,16 +62,16 @@
         const today = new Date().toISOString().split('T')[0];
 
         /* Domingo (0) a Quinta (4) */
-        if ( dayWeek >= 0 && dayWeek <= 5 ){
-            const newAray = data.items.filter(({date}) => {
+        if (dayWeek >= 0 && dayWeek <= 5) {
+            const newAray = data.items.filter(({ date }) => {
                 const [currentDate] = new Date(date).toISOString().split('T')
-                const futureDates = [5,6].map(day => new Date(Date.now() + (day - new Date().getDay()) * `${MILISECONDS_IN_A_DAY}`).toISOString().split('T')[0])
+                const futureDates = [5, 6].map(day => new Date(Date.now() + (day - new Date().getDay()) * `${MILISECONDS_IN_A_DAY}`).toISOString().split('T')[0])
                 return futureDates.includes(currentDate)
             })
 
-            function retornaCategoria (value){
+            function retornaCategoria(value) {
                 if (value.category == "parashat")
-                return value;
+                    return value;
             }
 
             var parashat = newAray.filter(retornaCategoria)
@@ -66,31 +80,31 @@
             const leyning = Object.entries(parashat[0].leyning)
 
             const verse = leyning.map(([key, value], index) => {
-            if (index < 7) {
-                return { key, value }
-            }
+                if (index < 7) {
+                    return { key, value }
+                }
             })
 
             const maftir = leyning.map(([key, value], index) => {
-            if (index == 9) {
-                return { key, value }
-            }
+                if (index == 9) {
+                    return { key, value }
+                }
             })
 
             const completo = leyning.map(([key, value], index) => {
-            if (index == 7) {
-                return { key, value } 
-            }
+                if (index == 7) {
+                    return { key, value }
+                }
             })
 
             const haftara = leyning.map(([key, value], index) => {
-            if (index == 8) {
-                return { key, value }
-            }
+                if (index == 8) {
+                    return { key, value }
+                }
             })
 
             if (parashat.length > 0) {
-                
+
                 var parasha = document.querySelector('.leiturascompletas');
                 parasha.innerHTML = "";
 
@@ -103,50 +117,50 @@
                 var hebcalverse = document.querySelector('.hebcalverse');
                 hebcalverse.innerHTML = "";
 
-                parashat.map(function(val){
+                parashat.map(function (val) {
                     parashaname.innerHTML += `<p>${val.title}</p>`
                     parashaheb.innerHTML += `<p>${val.hebrew}</p>`
-                        verse.forEach(item => {
-                            if (item) {
-                                let livro = item.value.split(' ')
-                                parasha.innerHTML += `<p>${item.key}: ${traducao[livro[0]]} ${livro[1]}</p>`
-                            }
-                        })
-                        maftir.forEach(item => {
-                            if (item) {
-                                let livro = item.value.split(' ')
-                                parasha.innerHTML += `<p>maf: ${traducao[livro[0]]} ${livro[1]}</p>`
-                            }
-                        })
-                        completo.forEach(item => {
-                            if (item) {
-                                let livro = item.value.split(' ')
-                                hebcalverse.innerHTML += `<p>${traducao[livro[0]]} ${livro[1]}</p>`
-                            }
-                        })
-                        haftara.forEach(item => {
-                            if (item) {
-                                let livro = item.value.split(' ')
-                                parasha.innerHTML += `<p>Haftarah: ${traducao[livro[0]]} ${livro[1]}</p>`
-                            }
-                        })
+                    verse.forEach(item => {
+                        if (item) {
+                            let livro = item.value.split(' ')
+                            parasha.innerHTML += `<p>${item.key}: ${traducao[livro[0]]} ${livro[1]}</p>`
+                        }
+                    })
+                    maftir.forEach(item => {
+                        if (item) {
+                            let livro = item.value.split(' ')
+                            parasha.innerHTML += `<p>maf: ${traducao[livro[0]]} ${livro[1]}</p>`
+                        }
+                    })
+                    completo.forEach(item => {
+                        if (item) {
+                            let livro = item.value.split(' ')
+                            hebcalverse.innerHTML += `<p>${traducao[livro[0]]} ${livro[1]}</p>`
+                        }
+                    })
+                    haftara.forEach(item => {
+                        if (item) {
+                            let livro = item.value.split(' ')
+                            parasha.innerHTML += `<p>Haftarah: ${traducao[livro[0]]} ${livro[1]}</p>`
+                        }
+                    })
 
                 })
             }
 
         }
-        
+
         /* Sabado (6) */
-        else if ( dayWeek == 6 ) {
-            const newAray = data.items.filter(({date}) => {
+        else if (dayWeek == 6) {
+            const newAray = data.items.filter(({ date }) => {
                 const [currentDate] = new Date(date).toISOString().split('T')
                 const futureDates = [today]
                 return futureDates.includes(currentDate)
             })
 
-            function retornaCategoria (value){
+            function retornaCategoria(value) {
                 if (value.category == "parashat")
-                return value;
+                    return value;
             }
 
             var parashat = newAray.filter(retornaCategoria)
@@ -155,31 +169,31 @@
             const leyning = Object.entries(parashat[0].leyning)
 
             const verse = leyning.map(([key, value], index) => {
-            if (index < 7) {
-                return { key, value }
-            }
+                if (index < 7) {
+                    return { key, value }
+                }
             })
 
             const maftir = leyning.map(([key, value], index) => {
-            if (index == 9) {
-                return { key, value }
-            }
+                if (index == 9) {
+                    return { key, value }
+                }
             })
 
             const completo = leyning.map(([key, value], index) => {
-            if (index == 7) {
-                return { key, value } 
-            }
+                if (index == 7) {
+                    return { key, value }
+                }
             })
 
             const haftara = leyning.map(([key, value], index) => {
-            if (index == 8) {
-                return { key, value }
-            }
+                if (index == 8) {
+                    return { key, value }
+                }
             })
 
             if (parashat.length > 0) {
-                
+
                 var parasha = document.querySelector('.leiturascompletas');
                 parasha.innerHTML = "";
 
@@ -192,43 +206,44 @@
                 var hebcalverse = document.querySelector('.hebcalverse');
                 hebcalverse.innerHTML = "";
 
-                parashat.map(function(val){
+                parashat.map(function (val) {
                     parashaname.innerHTML += `<p>${val.title}</p>`
                     parashaheb.innerHTML += `<p>${val.hebrew}</p>`
-                        verse.forEach(item => {
-                            if (item) {
-                                let livro = item.value.split(' ')
-                                parasha.innerHTML += `<p>${item.key}: ${traducao[livro[0]]} ${livro[1]}</p>`
-                            }
-                        })
-                        maftir.forEach(item => {
-                            if (item) {
-                                let livro = item.value.split(' ')
-                                parasha.innerHTML += `<p>maf: ${traducao[livro[0]]} ${livro[1]}</p>`
-                            }
-                        })
-                        completo.forEach(item => {
-                            if (item) {
-                                let livro = item.value.split(' ')
-                                hebcalverse.innerHTML += `<p>${traducao[livro[0]]} ${livro[1]}</p>`
-                            }
-                        })
-                        haftara.forEach(item => {
-                            if (item) {
-                                let livro = item.value.split(' ')
-                                parasha.innerHTML += `<p>Haftarah: ${traducao[livro[0]]} ${livro[1]}</p>`
-                            }
-                        })
+                    verse.forEach(item => {
+                        if (item) {
+                            let livro = item.value.split(' ')
+                            parasha.innerHTML += `<p>${item.key}: ${traducao[livro[0]]} ${livro[1]}</p>`
+                        }
+                    })
+                    maftir.forEach(item => {
+                        if (item) {
+                            let livro = item.value.split(' ')
+                            parasha.innerHTML += `<p>maf: ${traducao[livro[0]]} ${livro[1]}</p>`
+                        }
+                    })
+                    completo.forEach(item => {
+                        if (item) {
+                            let livro = item.value.split(' ')
+                            hebcalverse.innerHTML += `<p>${traducao[livro[0]]} ${livro[1]}</p>`
+                        }
+                    })
+                    haftara.forEach(item => {
+                        if (item) {
+                            let livro = item.value.split(' ')
+                            parasha.innerHTML += `<p>Haftarah: ${traducao[livro[0]]} ${livro[1]}</p>`
+                        }
+                    })
 
                 })
             }
 
         }
-        
+
     }
 
     fetchData()
 
 </script>
 </body>
+
 </html>
