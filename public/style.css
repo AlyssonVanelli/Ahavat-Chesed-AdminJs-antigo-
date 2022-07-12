@@ -849,13 +849,16 @@ section.outras-noticias {
   background-color: #031d30;
 }
 
-.btn-outline-success {
-  color: white;
+.btn {
   border-color: #0aacdc;
 }
 
-.btn-outline-success:hover {
+.btn:hover {
   background-color: #0aacdc;
+}
+
+.fa {
+  color: white;
 }
 
 .navbar-toggler i {
