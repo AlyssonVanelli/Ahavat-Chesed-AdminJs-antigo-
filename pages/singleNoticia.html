@@ -9,10 +9,10 @@
                 <h1 class="page-notice-title">
                     <%- noticia.titulo %>
                 </h1>
-                <img class="movie-image-container" src="../public/images/<%= noticia.image %>"
-                    alt="<%- noticia.titulo %>" />
-                <p>Fonte da noticia: <%- noticia.referenceImage %>
-                </p>
+                <img class="movie-image-container" src="../public/images/<%= noticia.image %>" alt="" />
+                <div class="movie-reference">
+                    <%- noticia.referenceImage %>
+                </div>
                 <p class="movie-description-container">
                     <%- noticia.conteudo %>
                 </p>

@@ -178,7 +178,7 @@ section.outras-noticias {
   box-shadow: 0px 1px 3px #686868;
   display: flex;
   flex-wrap: wrap;
-  align-content: space-between;
+  flex-direction: column;
 }
 
 .box-ultima-single h2 {
@@ -214,6 +214,7 @@ section.outras-noticias {
 
 .conteudo-noticia-single {
   margin-top: 1rem;
+  flex: 1;
 }
 
 .conteudo-noticia-single-span {
@@ -312,6 +313,51 @@ section.outras-noticias {
   max-width: 50%;
   margin: 0 auto;
   flex: 1;
+  flex-direction: column;
+}
+
+.sobre-title {
+  font-weight: bold;
+}
+
+.sobre-paragraph2 {
+  display: flex;
+}
+
+.sobre-center {
+  justify-content: center;
+  text-align: center;
+}
+
+.sobre-paragraph2 img {
+  display: flex;
+  width: 862px;
+  height: 450px;
+  margin-right: 20px;
+}
+
+.sobre-tre-coisas {
+  display: flex;
+  justify-content: space-between;
+}
+
+.sobre-tre-coisas img {
+  margin: 0 auto;
+  display: flex;
+  height: 100px;
+}
+
+.sobre-tefilin {
+  display: flex;
+}
+
+.sobre-tefilin img {
+  width: 600px;
+  height: 400px;
+}
+
+.sobre-transformar {
+  font-size: 31px;
 }
 
 .after {
@@ -364,7 +410,7 @@ section.outras-noticias {
   box-shadow: 0px 1px 3px #686868;
   display: flex;
   flex-wrap: wrap;
-  align-content: space-between;
+  flex-direction: column;
 }
 
 .box-ultima-completas h2 {
@@ -473,6 +519,13 @@ section.outras-noticias {
 
 .movie-details p {
   margin-left: 10px;
+}
+
+.movie-reference {
+  background-color: gainsboro;
+  max-width: 640px;
+  font-size: 12px;
+  margin-left: 18px;
 }
 
 .page-notice-title {
@@ -1011,5 +1064,48 @@ section.outras-noticias {
     background-color: #031d30;
     text-decoration: none;
     color: #0aacdc;
+  }
+
+  .sobre {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .sobre-conteiner {
+    width: 100%;
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+
+  .sobre-paragraph2 {
+    flex-wrap: wrap;
+  }
+
+  .sobre-paragraph2 img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .sobre-tefilin {
+    flex-wrap: wrap;
+  }
+
+  .sobre-tefilin img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .sobre-tre-coisas {
+    flex-direction: column;
+  }
+
+  .sobre-transformar {
+    font-size: 16px;
+  }
+
+  .movie-reference {
+    max-width: 90%;
+    font-size: 12px;
+    margin-left: 18xp;
   }
 }
