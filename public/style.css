@@ -938,6 +938,7 @@ section.outras-noticias {
   background-color: #031d30;
   color: white !important;
   margin-bottom: 0;
+  padding: 5px;
 }
 
 @media (max-width: 1280px) {
