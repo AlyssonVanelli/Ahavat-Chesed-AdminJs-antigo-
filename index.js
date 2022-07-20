@@ -16,6 +16,8 @@ const Noticias = require("./models/Noticias.js");
 const Horarios = require("./models/Horarios.js");
 const Users = require("./models/Users.js");
 const CategoriaNoticias = require("./models/CategoriasNoticias");
+const CategoriaPosts = require("./models/CategoriaPosts");
+const SubCategoria = require("./models/SubCategoria");
 
 const app = express();
 
@@ -138,6 +140,9 @@ const adminJSOptions = new AdminJS({
       ],
     },
     { resource: Horarios },
+    { resource: CategoriaNoticias },
+    { resource: CategoriaPosts },
+    { resource: SubCategoria },
   ],
   rootPath: "/admin",
   branding: {

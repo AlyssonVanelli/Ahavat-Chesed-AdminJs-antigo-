@@ -2,17 +2,28 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var postsSchema = new Schema({
-    titulo: String,
-    image: String,
-    conteudoCurto: String,
-    categoria: String,
-    conteudo: String,
-    slug: String,
-    referenceImage: String,
+    titulo: { type: String, required: true },
+    image: { type: String, required: true },
+    conteudoCurto: { type: String, required: true },
+    categoria: { type: String, required: true },
+    conteudo: { type: String, required: true },
+    slug: { type: String, required: true },
+    referenceImage: { type: String, required: true },
     createdAt: {
         type: Date,
         default: Date.now(),
-    }
+    },
+    categoriaPost: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'CategoriaPosts',
+        required: true
+    },
+    subCategoria: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'SubCategorias',
+        required: true
+    },
+
 }, { collection: 'posts' })
 
 var Posts = mongoose.model('Posts', postsSchema)

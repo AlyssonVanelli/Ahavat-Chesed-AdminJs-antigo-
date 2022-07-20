@@ -550,7 +550,6 @@ section.outras-noticias {
   background-size: cover;
   margin-top: 20px;
   border-radius: 20px;
-  margin-bottom: 20px;
 }
 
 .movie-description-container {
@@ -938,7 +937,8 @@ section.outras-noticias {
   background-color: #031d30;
   color: white !important;
   margin-bottom: 0;
-  padding: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 @media (max-width: 1280px) {

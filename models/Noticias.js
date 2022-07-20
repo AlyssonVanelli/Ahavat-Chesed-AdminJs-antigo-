@@ -12,6 +12,11 @@ var noticiasSchema = new Schema({
     createdAt: {
         type: Date,
         default: Date.now(),
+    },
+    categoriaNoticia: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'CategoriaNoticias',
+        required: true
     }
 }, { collection: 'noticias' })
 

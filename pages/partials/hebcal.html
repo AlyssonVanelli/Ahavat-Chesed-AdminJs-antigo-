@@ -61,6 +61,33 @@
         const dayWeek = new Date().getDay();
         const today = new Date().toISOString().split('T')[0];
 
+        const holidays = data.items.filter(({ date }) => {
+            const [currentDate] = new Date(date).toISOString().split('T')
+            const today = [0].map(day => new Date(Date.now() + (day - new Date().getDay()) * `${MILISECONDS_IN_A_DAY}`).toISOString().split('T')[0])
+            return today.includes(currentDate)
+        })
+
+        function retornaHolidays(value) {
+            if (value.category == "holiday")
+                return value;
+        }
+
+        if (retornaHolidays) {
+            var holiday = holidays.filter(retornaHolidays)
+
+            var todayholiday = document.querySelector('.holiday');
+            todayholiday.innerHTML = "";
+
+            holiday.map(function (val) {
+                todayholiday.innerHTML += `<h3>Festividade ${val.title}</h3>`
+            })
+
+            console.log(holiday[0].title)
+        }
+
+
+
+
         /* Domingo (0) a Quinta (4) */
         if (dayWeek >= 0 && dayWeek <= 5) {
             const newAray = data.items.filter(({ date }) => {
@@ -75,7 +102,6 @@
             }
 
             var parashat = newAray.filter(retornaCategoria)
-            //console.log(parashat[0].title)
 
             const leyning = Object.entries(parashat[0].leyning)
 
