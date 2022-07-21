@@ -18,6 +18,7 @@ const Users = require("./models/Users.js");
 const CategoriaNoticias = require("./models/CategoriasNoticias");
 const CategoriaPosts = require("./models/CategoriaPosts");
 const SubCategoria = require("./models/SubCategoria");
+const Author = require("./models/Author");
 
 const app = express();
 
@@ -143,6 +144,29 @@ const adminJSOptions = new AdminJS({
     { resource: CategoriaNoticias },
     { resource: CategoriaPosts },
     { resource: SubCategoria },
+    {
+      resource: Author,
+      options: {
+        properties: {
+          image: { isVisible: { edit: false, list: false, show: false, filter: false } },
+        }
+      },
+      features: [
+        uploadFeature({
+          provider: {
+            local: {
+              bucket: path.join(__dirname, "./public/images/author"),
+            },
+          },
+          properties: {
+            key: "image",
+            file: "upload file",
+          },
+          uploadPath: (record, filename) =>
+            Date.now() + ".jpg",
+        }),
+      ],
+    },
   ],
   rootPath: "/admin",
   branding: {
