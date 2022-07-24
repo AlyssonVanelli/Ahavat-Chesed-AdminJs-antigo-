@@ -655,7 +655,7 @@ app.get("/post/:slug", (req, res) => {
           res.redirect("/");
         }
       }
-    );
+    ).populate('categoriaPost').populate('subCategoria')
   } else {
     Posts.find(
       { titulo: { $regex: req.query.busca, $options: "i" } },
@@ -689,7 +689,7 @@ app.get("/post/:slug", (req, res) => {
           }
         );
       }
-    )
+    ).populate('')
   }
 });
 
@@ -721,7 +721,7 @@ app.get("/noticia/:slug", (req, res) => {
           res.redirect("/");
         }
       }
-    );
+    ).populate('categoriaNoticia');
   } else {
     Posts.find(
       { titulo: { $regex: req.query.busca, $options: "i" } },
@@ -755,7 +755,7 @@ app.get("/noticia/:slug", (req, res) => {
           }
         );
       }
-    )
+    ).populate('categoriaNoticia')
   }
 });
 

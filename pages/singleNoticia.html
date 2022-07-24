@@ -4,7 +4,12 @@
         <div class="row">
             <div class="offset-md-1 col-md-8 movie-container">
                 <div class="movie-details">
-                    <span>Categoria: <%- noticia.categoria %></span>
+                    <% if(typeof noticia.categoriaPost !=='undefined' ){ %>
+                        <span>Categoria: <%- noticia.categoriaPost.categoria %> %>
+                        </span>
+                        <% } else{ %>
+                            <span>Categoria: </span>
+                            <% } %>
                 </div>
                 <h1 class="page-notice-title">
                     <%- noticia.titulo %>
