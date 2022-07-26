@@ -328,7 +328,7 @@ app.get("/", (req, res) => {
 
 app.get("/postagens", (req, res) => {
   if (req.query.busca == null) {
-    Posts.find({})
+    Posts.find({}).populate('categoriaPost')
       .sort({ _id: -1 })
       .exec(function (err, posts) {
         posts = posts.map(function (val) {
@@ -338,7 +338,7 @@ app.get("/postagens", (req, res) => {
             conteudo: val.conteudo,
             conteudoCurto: val.conteudoCurto,
             slug: val.slug,
-            categoria: val.categoria,
+            categoria: val.categoriaPost.categoria,
           };
         });
         res.render("postagens", { posts: posts });
@@ -382,7 +382,7 @@ app.get("/postagens", (req, res) => {
 
 app.get("/noticias", (req, res) => {
   if (req.query.busca == null) {
-    Noticias.find({})
+    Noticias.find({}).populate('categoriaNoticia')
       .sort({ _id: -1 })
       .exec(function (err, noticias) {
         noticias = noticias.map(function (val) {
@@ -392,7 +392,6 @@ app.get("/noticias", (req, res) => {
             conteudo: val.conteudo,
             conteudoCurto: val.conteudoCurto,
             slug: val.slug,
-            categoria: val.categoria,
           };
         });
         res.render("noticias", { noticias: noticias });
