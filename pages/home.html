@@ -65,7 +65,7 @@
                                                         src="../public/images/<%= posts[i].image %>"
                                                         alt="<%- posts[i].titulo %>" />
                                                     <div class="category-img">
-                                                        <%- posts[i].categoria %>
+                                                        <p><%- posts[i].categoria %></p>
                                                     </div>
                                                 </a>
                                             </div>
@@ -85,9 +85,9 @@
                                                 Lendo...</a>
                                         </div>
                                         <% } %>
-                                            <div class="vejamaisbutton">
-                                                <a href="/postagens">Veja Mais</a>
-                                            </div>
+                                </div>
+                                <div class="vejamaisbutton">
+                                    <a href="/postagens">Veja Mais</a>
                                 </div>
                                 <h2 style="margin-top: 50px">NOTICIAS</h2>
                                 <div class="ultimas-cards">
@@ -97,7 +97,7 @@
                                                 <a href="/noticia/<%= noticias[i].slug %>" class="Linktext"><img
                                                         src="../public/images/<%= noticias[i].image %>" alt="" />
                                                     <div class="category-img">
-                                                        <%- noticias[i].categoria %>
+                                                        <p><%- noticias[i].categoria %></p>
                                                     </div>
                                                 </a>
                                             </div>
@@ -117,9 +117,9 @@
                                                 Lendo...</a>
                                         </div>
                                         <% } %>
-                                            <div class="vejamaisbutton">
-                                                <a href="/noticias">Veja Mais</a>
-                                            </div>
+                                </div>
+                                <div class="vejamaisbutton">
+                                    <a href="/noticias">Veja Mais</a>
                                 </div>
                             </div>
                         </div>

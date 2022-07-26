@@ -171,9 +171,7 @@ section.outras-noticias {
 
 .box-ultima-single {
   margin-top: 20px;
-  width: 27%;
-  margin-right: 3%;
-  margin-left: 3%;
+  width: 350px;
   background-color: #ffffff;
   box-shadow: 0px 1px 3px #686868;
   display: flex;
@@ -233,6 +231,8 @@ section.outras-noticias {
   flex-direction: row;
   max-width: 100%;
   flex-wrap: wrap;
+  gap: 30px;
+  justify-content: space-evenly;
 }
 
 .vejamaisbutton {
@@ -939,12 +939,6 @@ section.outras-noticias {
   margin-bottom: 0;
   padding-left: 5px;
   padding-right: 5px;
-}
-
-@media (max-width: 1280px) {
-  .box-ultima-single {
-    width: 44%;
-  }
 }
 
 @media (max-width: 414px) {

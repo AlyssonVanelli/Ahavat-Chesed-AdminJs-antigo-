@@ -5,7 +5,6 @@ var noticiasSchema = new Schema({
     titulo: String,
     image: String,
     conteudoCurto: String,
-    categoria: String,
     conteudo: String,
     slug: String,
     referenceImage: String,

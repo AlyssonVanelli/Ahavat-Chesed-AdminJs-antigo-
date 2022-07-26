@@ -66,7 +66,6 @@ const adminJSOptions = new AdminJS({
           conteudo: { type: "richtext" },
           titulo: { type: "richtext" },
           conteudoCurto: { type: "richtext" },
-          categoria: { type: "richtext" },
           image: { isVisible: { edit: false, list: false, show: false, filter: false } }
         },
       },
@@ -120,7 +119,6 @@ const adminJSOptions = new AdminJS({
           conteudo: { type: "richtext" },
           titulo: { type: "richtext" },
           conteudoCurto: { type: "richtext" },
-          categoria: { type: "richtext" },
           image: { isVisible: { edit: false, list: false, show: false, filter: false } },
         },
       },
@@ -228,6 +226,7 @@ app.get("/", (req, res) => {
     Posts.find({})
       .sort({ _id: -1 })
       .limit(6)
+      .populate('categoriaPost')
       .exec(function (err, posts) {
         posts = posts.map(function (val) {
           return {
@@ -236,7 +235,7 @@ app.get("/", (req, res) => {
             conteudo: val.conteudo,
             conteudoCurto: val.conteudoCurto,
             slug: val.slug,
-            categoria: val.categoria,
+            categoria: val.categoriaPost.categoria,
           };
         });
 
@@ -253,25 +252,10 @@ app.get("/", (req, res) => {
                 categoria: val.categoria,
               };
             });
-
-            Posts.find({})
-              .sort({ _id: -1 })
-              .limit(3)
-              .exec(function (err, ultimas) {
-                ultimas = ultimas.map(function (val) {
-                  return {
-                    titulo: val.titulo,
-                    image: val.image,
-                    conteudo: val.conteudo,
-                    conteudoCurto: val.conteudoCurto,
-                    slug: val.slug,
-                    categoria: val.categoria,
-                  };
-                });
-
                 Noticias.find({})
                   .sort({ _id: -1 })
                   .limit(6)
+                  .populate('categoriaNoticia')
                   .exec(function (err, noticias) {
                     noticias = noticias.map(function (val) {
                       return {
@@ -280,7 +264,7 @@ app.get("/", (req, res) => {
                         conteudo: val.conteudo,
                         conteudoCurto: val.conteudoCurto,
                         slug: val.slug,
-                        categoria: val.categoria,
+                        categoria: val.categoriaNoticia.categoria,
                       };
                     });
 
@@ -297,13 +281,11 @@ app.get("/", (req, res) => {
                         res.render("home", {
                           posts: posts,
                           destaques: destaques,
-                          ultimas: ultimas,
                           noticias: noticias,
                           horarios: horarios,
                         });
                       });
                   });
-              });
           });
       });
 
@@ -318,7 +300,7 @@ app.get("/", (req, res) => {
             descricaoCurta: val.conteudoCurto,
             image: val.image,
             slug: val.slug,
-            categoria: val.categoria,
+            categoria: val.categoriaPost,
           };
         });
 
@@ -332,7 +314,7 @@ app.get("/", (req, res) => {
                 descricaoCurta: val.conteudoCurto,
                 image: val.image,
                 slug: val.slug,
-                categoria: val.categoria,
+                categoria: val.categoriaNoticia,
               };
             });
 

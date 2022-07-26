@@ -5,7 +5,6 @@ var postsSchema = new Schema({
     titulo: { type: String, required: true },
     image: { type: String, required: true },
     conteudoCurto: { type: String, required: true },
-    categoria: { type: String, required: true },
     conteudo: { type: String, required: true },
     slug: { type: String, required: true },
     referenceImage: { type: String, required: true },
@@ -21,7 +20,6 @@ var postsSchema = new Schema({
     subCategoria: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'SubCategorias',
-        required: true
     },
 
 }, { collection: 'posts' })
