@@ -354,7 +354,6 @@ app.get("/postagens", (req, res) => {
             descricaoCurta: val.conteudoCurto,
             image: val.image,
             slug: val.slug,
-            categoria: val.categoria,
           };
         });
 
@@ -368,7 +367,6 @@ app.get("/postagens", (req, res) => {
                 descricaoCurta: val.conteudoCurto,
                 image: val.image,
                 slug: val.slug,
-                categoria: val.categoria,
               };
             });
 
@@ -382,8 +380,9 @@ app.get("/postagens", (req, res) => {
 
 app.get("/noticias", (req, res) => {
   if (req.query.busca == null) {
-    Noticias.find({}).populate('categoriaNoticia')
+    Noticias.find({})
       .sort({ _id: -1 })
+      .populate('categoriaNoticia')
       .exec(function (err, noticias) {
         noticias = noticias.map(function (val) {
           return {
@@ -392,6 +391,7 @@ app.get("/noticias", (req, res) => {
             conteudo: val.conteudo,
             conteudoCurto: val.conteudoCurto,
             slug: val.slug,
+            categoria: val.categoriaNoticia.categoria
           };
         });
         res.render("noticias", { noticias: noticias });
@@ -407,7 +407,6 @@ app.get("/noticias", (req, res) => {
             descricaoCurta: val.conteudoCurto,
             image: val.image,
             slug: val.slug,
-            categoria: val.categoria,
           };
         });
 
@@ -421,7 +420,6 @@ app.get("/noticias", (req, res) => {
                 descricaoCurta: val.conteudoCurto,
                 image: val.image,
                 slug: val.slug,
-                categoria: val.categoria,
               };
             });
 
@@ -447,7 +445,6 @@ app.get("/contribua", (req, res) => {
             descricaoCurta: val.conteudoCurto,
             image: val.image,
             slug: val.slug,
-            categoria: val.categoria,
           };
         });
 
@@ -461,7 +458,6 @@ app.get("/contribua", (req, res) => {
                 descricaoCurta: val.conteudoCurto,
                 image: val.image,
                 slug: val.slug,
-                categoria: val.categoria,
               };
             });
 
@@ -487,7 +483,6 @@ app.get("/sobre", (req, res) => {
             descricaoCurta: val.conteudoCurto,
             image: val.image,
             slug: val.slug,
-            categoria: val.categoria,
           };
         });
 
@@ -501,7 +496,6 @@ app.get("/sobre", (req, res) => {
                 descricaoCurta: val.conteudoCurto,
                 image: val.image,
                 slug: val.slug,
-                categoria: val.categoria,
               };
             });
 
@@ -525,7 +519,6 @@ app.get("/estudos", (req, res) => {
             conteudo: val.conteudo,
             conteudoCurto: val.conteudoCurto,
             url: val.url,
-            categoria: val.categoria,
           };
         });
 
@@ -542,7 +535,6 @@ app.get("/estudos", (req, res) => {
             descricaoCurta: val.conteudoCurto,
             image: val.image,
             slug: val.slug,
-            categoria: val.categoria,
           };
         });
 
@@ -582,7 +574,6 @@ app.get("/faleconosco", (req, res) => {
             descricaoCurta: val.conteudoCurto,
             image: val.image,
             slug: val.slug,
-            categoria: val.categoria,
           };
         });
 
@@ -596,7 +587,6 @@ app.get("/faleconosco", (req, res) => {
                 descricaoCurta: val.conteudoCurto,
                 image: val.image,
                 slug: val.slug,
-                categoria: val.categoria,
               };
             });
 
@@ -648,7 +638,6 @@ app.get("/post/:slug", (req, res) => {
             descricaoCurta: val.conteudoCurto,
             image: val.image,
             slug: val.slug,
-            categoria: val.categoria,
           };
         });
 
@@ -662,7 +651,6 @@ app.get("/post/:slug", (req, res) => {
                 descricaoCurta: val.conteudoCurto,
                 image: val.image,
                 slug: val.slug,
-                categoria: val.categoria,
               };
             });
 
@@ -714,7 +702,6 @@ app.get("/noticia/:slug", (req, res) => {
             descricaoCurta: val.conteudoCurto,
             image: val.image,
             slug: val.slug,
-            categoria: val.categoria,
           };
         });
 
@@ -728,7 +715,6 @@ app.get("/noticia/:slug", (req, res) => {
                 descricaoCurta: val.conteudoCurto,
                 image: val.image,
                 slug: val.slug,
-                categoria: val.categoria,
               };
             });
 
