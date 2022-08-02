@@ -19,6 +19,7 @@ const CategoriaNoticias = require("./models/CategoriasNoticias");
 const CategoriaPosts = require("./models/CategoriaPosts");
 const SubCategoria = require("./models/SubCategoria");
 const Author = require("./models/Author");
+const SeferTorah = require("./models/SeferTorah");
 
 const app = express();
 
@@ -458,6 +459,55 @@ app.get("/contribua", (req, res) => {
                 descricaoCurta: val.conteudoCurto,
                 image: val.image,
                 slug: val.slug,
+              };
+            });
+
+            res.render("busca", { posts: posts, contagem: posts.length, noticias: noticias, contagem2: noticias.length });
+          }
+        );
+      }
+    )
+  }
+});
+
+app.get("/sefertorah", (req, res) => {
+  if (req.query.busca == null) {
+    SeferTorah.find({})
+    .exec(function (err, parasha) {
+      parasha = parasha.map(function (val) {
+        return {
+          parasha: val.parasha,
+          doador: val.doador,
+        };
+      });
+      res.render("sefertorah", { parasha: parasha });
+    });
+  } else {
+    Posts.find(
+      { titulo: { $regex: req.query.busca, $options: "i" } },
+      function (err, posts) {
+        posts = posts.map(function (val) {
+          return {
+            titulo: val.titulo,
+            conteudo: val.conteudo,
+            descricaoCurta: val.conteudoCurto,
+            image: val.image,
+            slug: val.slug,
+            categoria: val.categoria,
+          };
+        });
+
+        Noticias.find(
+          { titulo: { $regex: req.query.busca, $options: "i" } },
+          function (err, noticias) {
+            noticias = noticias.map(function (val) {
+              return {
+                titulo: val.titulo,
+                conteudo: val.conteudo,
+                descricaoCurta: val.conteudoCurto,
+                image: val.image,
+                slug: val.slug,
+                categoria: val.categoria,
               };
             });
 

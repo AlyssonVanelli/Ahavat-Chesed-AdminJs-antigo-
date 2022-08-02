@@ -1,8 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,500;0,800;1,500&display=swap");
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-}
+  font-family: "Open Sans", "Poppins", sans-serif;
+} 
 
 body {
   margin-bottom: 0px;
@@ -1102,5 +1104,203 @@ section.outras-noticias {
     max-width: 90%;
     font-size: 12px;
     margin-left: 18xp;
+  }
+}
+
+/* SEFER Torah */
+
+.sefertorah {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex-wrap: wrap;
+}
+.topo-texto {
+  width: 80%;
+}
+.titulo-texto {
+  padding: 40px;
+  display: block;
+  font-size: 2.2vw;
+  font-weight: bold;
+}
+.box-azul {
+  background-color: rgb(0, 231, 231);
+  width: 90%;
+  height: 10px;
+  margin-left: 5%;
+  margin-bottom: 20px;
+}
+.texto {
+  font-size: 1.1vw;
+  padding: 10px;
+}
+.texto p {
+  padding: 15px;
+  text-align: justify;
+}
+
+.link {
+  margin: 30px;
+  font-size: 30px;
+}
+
+.btn-vakinha {
+  text-decoration: none;
+  text-align: center;
+  justify-content: center;
+  background-color: rgb(25, 25, 90);
+  color: white;
+  font-size: 35px;
+  font-weight: bold;
+  padding: 20px 20px 23px 20px;
+  border-radius: 10px;
+  font-family: "Poppins";
+}
+
+/* -----------------------------------------------------quadro----------------------------------------------- */
+.quadro-container {
+  position: relative;
+  width: 80%;
+  margin: 20px 0px;
+  padding: 50px 0px;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  gap: 40px 15px;
+  font-size: 1.2vw;
+  background-color: whitesmoke;
+}
+.quadro-container p {
+  font-size: 1.3vw;
+  padding: 10px;
+  margin-bottom: 30px;
+  width: 100%;
+}
+
+.quadro {
+  position: relative;
+  width: 300px;
+  height: 420px;
+  border-radius: 20px;
+  background-color: #fff;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+  transition: 500ms;
+}
+
+.quadro:hover {
+  transform: scale(1.02);
+}
+
+.box-parasha {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  /* background: rgb(25, 25, 90); */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 1)),
+    url(./images/tora.jpg);
+  clip-path: circle(180px at center 0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nomeparasha {
+  width: 100%;
+  height: 30%;
+  text-align: center;
+  position: absolute;
+  bottom: 285px;
+  justify-items: center;
+  color: #f5f5f5;
+  font-size: 38px;
+  font-weight: bold;
+  font-family: "Poppins";
+  padding: 0px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.box-nome {
+  position: absolute;
+  top: 200px;
+  page-break-after: 20px;
+  text-align: center;
+  width: 100%;
+  color: #000;
+}
+
+.merito {
+  color: #4b4b4b;
+  font-size: initial;
+  margin-bottom: 15px;
+  font-family: "Poppins";
+}
+
+.nome {
+  color: rgb(32, 32, 32);
+  font-weight: bold;
+  font-size: 30px;
+  font-family: "Poppins";
+}
+
+/* -------------------------------------media query------------------------------------------------- */
+
+@media (max-width: 1280px) {
+  .topo-texto {
+    width: 90%;
+  }
+  .texto {
+    font-size: 20px;
+  }
+  .titulo-texto {
+    font-size: 35px;
+  }
+
+  .quadro-container {
+    width: 90%;
+  }
+  .quadro-container p {
+    font-size: 25px;
+  }
+}
+
+@media (max-width: 414px) {
+  .texto {
+    font-size: 18px;
+  }
+
+  .titulo-texto {
+    font-size: 30px;
+  }
+
+  .link {
+    font-size: 30px;
+  }
+}
+@media (max-width: 340px) {
+  .quadro {
+    width: 95%;
+    flex-wrap: nowrap;
+    padding: 0px;
+  }
+  .box-parasha {
+    min-width: 110px;
+  }
+
+  .merito {
+    font-size: 5vw;
+  }
+  .nome {
+    font-size: 7vw;
+  }
+  .topo-texto {
+    width: 95%;
   }
 }

@@ -1,0 +1,135 @@
+<%- include('partials/header.html') %>
+
+    <section class="sefertorah">
+      <div class="topo-texto">
+        <h2 class="titulo-texto">
+          O Mérito da Tsedakah para aquisição do Sefer Torah para a sinagoga
+        </h2>
+        <div class="box-azul"></div>
+        <!-- titulo-texto-->
+        <div class="texto">
+          <p>
+            Rabi Shimeon HaTsadik costumava dizer: “O mundo se mantém sobre três
+            coisas: A Torah, o serviço divino e a benevolência (atos de
+            bondade)”
+          </p>
+          <p>
+            Uma prática bastante comum dentre o povo de Israel é a tsedakah e
+            dentro do pensamento da Sinagoga Ahavat Chessed, todos valorizamos
+            muito o “amar ser bom”. Mas há um tipo de tsedakah que gera um
+            grande mérito: A tsedakah para o crescimento espiritual do povo
+            judeu. Como assim?
+          </p>
+          <p>
+            Muitas familias judaicas, quando lhes nascem um filho, ou no bar
+            mitsvah de seus filhos, ou no casamento deles, costumam doar para as
+            sinagogas um sefer torah. Aliás, qualquer pessoa atenta que visite
+            Israel perceberá que em muitos museus, praças e sinagogas, há placas
+            memoriais em reconhecimento àquelas pessoas que, através de suas
+            ofertas, ajudam a construir a Terra Santa.
+          </p>
+          <p>
+            Imagine quão grande é o seu mérito quando pessoas forem ler no rolo
+            sagrado da Torah e forem edificadas através do estudo de suas
+            preciosas letras, adquiridas com os esforços de todos e a tsedakah
+            valiosa vinda de ti. É por isso que o povo judeu é tão abençoado.
+          </p>
+          <p>
+            Vários judeus são famosos benfeitores, reconhecidos por sua enorme
+            visão em apoiar sinagogas e instituições de ensino da Torah,
+            chamadas de Yeshivot e Beit Midrashim. Aquele que ajuda a construir
+            uma sinagoga, ajuda a formar rabinos, mestres e uma infinidade de
+            bons judeus pelo mundo afora.
+          </p>
+          <p>
+            Uma famosa citação judaica, mencionada inclusive no filme “A lista
+            de Schindler” afirma que: “Aquele que salva uma vida é considerado
+            como se tivesse salvo um mundo inteiro”. Isso também é verdadeiro
+            naquele que contribui para a aquisição de um Sefer Torah, pois as
+            palavras sagradas ali contidas conduzirão pessoas a aprender, se
+            tornarem devotas, quem sabe, rabinos, escritores de livros sagrados,
+            mestres. Gerações serão transformadas através das letras da Torah.
+          </p>
+          <p>
+            Por isso, convidamos você a se tornar mais um que carregará méritos
+            por toda a vida, ajudando a Ahavat Chessed a adquirir seu primeiro
+            Sefer Torah Kasher, escrito à mão por um sofer (escriba) devoto.
+          </p>
+          <p>
+            O objetivo a ser alcançado é de cerca de 4 mil dólares. Há quem
+            possa doar o valor integral? Certamente! Mas também apreciamos
+            compartilhar os méritos. Então fizemos assim:
+          </p>
+          <p>
+            Criamos um site, totalmente transparente, onde cada pessoa poderá
+            conferir o valor arrecadado, e colaborar, conforme o desejo de seu
+            coração, para a aquisição dessa preciosidade, um rolo da Torah
+            (ainda que usado) para continuar a edificar vidas.
+          </p>
+          <p>
+            Os cinco livros da Torah são divididos em 54 parashiot, 54 porções
+            semanais de estudo. Dividimos o valor total de R$ 25000,00 em 54 e
+            cada pessoa pode contribuir com o valor que desejar, mas se o valor
+            for de R$ 460 você pode selecionar uma porção da Torah, que ao ser
+            lida na sinagoga, será em sua honra, seu mérito. Que o Eterno
+            considere isso meritório em eu favor. Você pode selecionar a
+            parashah da sua data de nascimento, ou se você desejar honrar seus
+            pais, filhos, ou algum ente querido já falecido, poderá fazê-lo de
+            igual forma, e quando for lido no rolo da Torah, será em memória
+            dessa pessoa.
+          </p>
+          <p>
+            Caso você não saiba a porção da Torah lida em sua data de nascimento
+            (ou da pessoa que você desejar honrar) entre em contato conosco,
+            informando-nos a data em que nasceu e veremos a porção certa.
+          </p>
+          <p>
+            Um grande filantropo judeu, benfeitor que patrocinou a construção de
+            Sinagogas, Yeshivot, Hospitais e de grande mérito entre os filhos de
+            Israel, chamado de Maurice Wohl, junto com sua esposa Vivienne Wohl
+            dizia: “Se deixarmos as pessoas saberem que estamos doando, elas
+            serão inspiradas a doar”.
+          </p>
+          <p>
+            Você pode escolher contribuir de forma anônima, e será igualmente
+            honrado diante do Eterno, ou caso opte por não ocultar sua oferta,
+            permita-nos reconhecer seu gesto de grandeza e agradecermos, fazendo
+            nossas preces a Deus, pedindo que o Santo, Bendito seja Ele, possa
+            cobrir de bênçãos sua familia e entes queridos.
+          </p>
+          <div class="link">
+            Acesse nossa Vakinha e tome parte neste propósito!
+          </div>
+          <a href="https://www.vakinha.com.br/3015524" class="btn-vakinha"
+            >Acessar</a
+          >
+        </div>
+      </div>
+      <hr style="width: 80%; margin-top: 30px" />
+      <div class="quadro-container">
+        <p>
+          Segue abaixo a lista com as parashiot e os nomes dos benfeitores que
+          nos tem agraciado com sua preciosa oferta.
+        </p>
+        <% for (let i=0; i < parasha.length; i++) { %>
+        <div class="quadro">
+          <div class="box-parasha">
+            <div class="nomeparasha"><%- parasha[i].parasha %></div>
+          </div>
+          <div class="box-nome">
+            <div class="merito">Dedicada aos méritos de:</div>
+            <div class="nome"><%- parasha[i].doador %></div>
+          </div>
+        </div>
+        <% } %>
+      </div>
+      <p class="link">
+        "amai as pessoas, e aproximai-as da Lei Divina" <br />(Pirkei Avot 1:2)
+      </p>
+    </section>
+
+    <%- include('partials/footer.html') %>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
