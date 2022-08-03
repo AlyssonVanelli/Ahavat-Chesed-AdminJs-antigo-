@@ -1,0 +1,34 @@
+
+<%- include('partials/header.html') %>
+
+<section class="outras-noticias">
+    <div class="title-outras-noticia">
+        <% for(let i = 0; i < 1; i++) { %>
+            <h2>Navegando pela Categoria: <%- posts[i].categoria.categoria %></h2>
+        <% } %>
+        <br><br>
+        <div class="center">
+            <div style="width:100%;" class="mais-lidas">
+                <div class="mais-lidas-noticias">
+                    <% for(let i = 0; i < posts.length; i++) { %>
+                    <div class="mais-lida-noticia-single">
+                        <img src="../../public/images/<%- posts[i].image %>" alt="<%- posts[i].titulo %>"/>
+                        <div class="texto-mais-lida-single">
+                            <h4><%- posts[i].titulo %></h4>
+                            <p><%- posts[i].conteudoCurto %></p>
+                            <a href="/post/<%= posts[i].slug %>">Saiba mais</a>
+                        </div>
+                    </div>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<%- include('partials/footer.html') %>
+
+</body>
+</html>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>

@@ -5,7 +5,7 @@
             <div class="offset-md-1 col-md-8 movie-container">
                 <div class="movie-details">
                     <% if(typeof noticia.categoriaNoticia !=='undefined' ){ %>
-                        <span>Categoria: <%- noticia.categoriaNoticia.categoria %> %>
+                        <span>Categoria: <a href="/noticia/categoria/<%- noticia.categoriaNoticia._id %>"><%- noticia.categoriaNoticia.categoria %></a> %>
                         </span>
                         <% } else{ %>
                             <span>Categoria: </span>

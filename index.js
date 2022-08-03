@@ -6,6 +6,7 @@ const AdminJSExpress = require("@adminjs/express");
 const AdminJSMongoose = require("@adminjs/mongoose");
 const uploadFeature = require("@adminjs/upload");
 const bcrypt = require('bcrypt');
+const ObjectId = require('mongodb').ObjectId; 
 require("./config/db");
 require("dotenv").config();
 
@@ -712,6 +713,27 @@ app.get("/post/:slug", (req, res) => {
   }
 });
 
+app.get("/post/categorias/:categoria", (req, res) => {
+  Posts.find(
+    {categoriaPost: { _id: new ObjectId(req.params.categoria) } }, 
+  )
+  .populate('categoriaPost')
+  .exec(function (err, posts) {
+    posts = posts.map(function (val) {
+      return {
+        titulo: val.titulo,
+        image: val.image,
+        conteudo: val.conteudo,
+        conteudoCurto: val.conteudoCurto,
+        slug: val.slug,
+        categoria: val.categoriaPost,
+      };
+    });
+
+    res.render("categoriasPosts", {posts})
+  });
+})
+
 app.get("/noticia/:slug", (req, res) => {
   if (req.query.busca == null) {
     Noticias.findOneAndUpdate(
@@ -775,6 +797,27 @@ app.get("/noticia/:slug", (req, res) => {
     ).populate('categoriaNoticia')
   }
 });
+
+app.get("/noticia/categoria/:categoria", (req, res) => {
+  Noticias.find(
+    {categoriaNoticia: { _id: new ObjectId(req.params.categoria) } }, 
+  )
+  .populate('categoriaNoticia')
+  .exec(function (err, noticia) {
+    noticia = noticia.map(function (val) {
+      return {
+        titulo: val.titulo,
+        image: val.image,
+        conteudo: val.conteudo,
+        conteudoCurto: val.conteudoCurto,
+        slug: val.slug,
+        categoria: val.categoriaNoticia,
+      };
+    });
+
+    res.render("categoriasNoticias", {noticia})
+  });
+})
 
 app.listen(5000, () => {
   console.log("server rodando!");
