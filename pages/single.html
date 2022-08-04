@@ -4,12 +4,11 @@
         <div class="row">
             <div class="offset-md-1 col-md-8 movie-container">
                 <div class="movie-details">
-                    <% if(typeof noticia.categoriaPost !=='undefined' ){ %>
-                        <span>Categoria: <a href="/post/categorias/<%- noticia.categoriaPost._id %>"><%- noticia.categoriaPost.categoria %></a> > <%- noticia.subCategoria.nome %>
-                        </span>
-                        <% } else{ %>
-                            <span>Categoria: </span>
-                            <% } %>
+                    <% if(noticia.subCategoria.nome == 'Blank'){ %>
+                        <span>Categoria: <a href="/post/categorias/<%- noticia.categoriaPost._id %>"><%= noticia.categoriaPost.categoria %></a> </span>
+                    <% } else { %>
+                        <span>Categoria: <a href="/post/categorias/<%- noticia.categoriaPost._id %>"><%= noticia.categoriaPost.categoria %></a> > <a href="/post/subcategorias/<%- noticia.subCategoria._id %>"><%= noticia.subCategoria.nome %></a>
+                    <% } %>
                 </div>
                 <h1 class="page-notice-title">
                     <%- noticia.titulo %>
@@ -21,6 +20,11 @@
                 <p class="movie-description-container">
                     <%- noticia.conteudo %>
                 </p>
+            </div>
+            <div>
+                <span>Nome: <%- noticia.Author.nome %></span>
+                <span>Descrição: <%- noticia.Author.descricao %></span>
+                <img class="" src="../public/images/author/<%= noticia.Author.image %>" alt="" />
             </div>
             <div class="offset-md-1 col-md-8 veja-mais">
                 <h3 class="veja-mais">VEJA TAMBÉM</h3>

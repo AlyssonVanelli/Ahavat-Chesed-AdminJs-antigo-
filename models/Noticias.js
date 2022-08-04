@@ -16,6 +16,11 @@ var noticiasSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'CategoriaNoticias',
         required: true
+    },
+    Author: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Author',
+        required: true
     }
 }, { collection: 'noticias' })
 

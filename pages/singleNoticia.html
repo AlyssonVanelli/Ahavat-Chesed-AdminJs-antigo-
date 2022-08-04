@@ -22,6 +22,11 @@
                     <%- noticia.conteudo %>
                 </p>
             </div>
+            <div>
+                <span>Nome: <%- noticia.Author.nome %></span>
+                <span>Descrição: <%- noticia.Author.descricao %></span>
+                <img class="" src="../public/images/author/<%= noticia.Author.image %>" alt="" />
+            </div>
             <div class="offset-md-1 col-md-8 veja-mais">
                 <h3 class="veja-mais">VEJA TAMBÉM</h3>
                 <%- include('veja-mais-noticias.html') %>

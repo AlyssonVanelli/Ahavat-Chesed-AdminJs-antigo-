@@ -671,13 +671,25 @@ app.get("/post/:slug", (req, res) => {
                 };
               });
 
-              res.render("single", { noticia: resposta, ultimas: ultimas });
+              Author.find({})
+              .sort({ _id: -1 })
+              .exec(function (err, author) {
+                author = author.map(function (val) {
+                  return {
+                    nome: val.nome,
+                    image: val.image,
+                    descricao: val.descricao,
+                  };
+                });
+  
+                res.render("single", { noticia: resposta, ultimas: ultimas, author: author });
             });
-        } else {
+            });
+          } else {
           res.redirect("/");
         }
       }
-    ).populate('categoriaPost').populate('subCategoria')
+    ).populate('categoriaPost').populate('subCategoria').populate('Author')
   } else {
     Posts.find(
       { titulo: { $regex: req.query.busca, $options: "i" } },
@@ -734,6 +746,27 @@ app.get("/post/categorias/:categoria", (req, res) => {
   });
 })
 
+app.get("/post/subcategorias/:subcategoria", (req, res) => {
+  Posts.find(
+    {subCategoria: { _id: new ObjectId(req.params.subcategoria) } }, 
+  )
+  .populate('subCategoria')
+  .exec(function (err, posts) {
+    posts = posts.map(function (val) {
+      return {
+        titulo: val.titulo,
+        image: val.image,
+        conteudo: val.conteudo,
+        conteudoCurto: val.conteudoCurto,
+        slug: val.slug,
+        categoria: val.subCategoria,
+      };
+    });
+
+    res.render("subcategoriasPosts", {posts})
+  });
+})
+
 app.get("/noticia/:slug", (req, res) => {
   if (req.query.busca == null) {
     Noticias.findOneAndUpdate(
@@ -756,13 +789,25 @@ app.get("/noticia/:slug", (req, res) => {
                 };
               });
 
-              res.render("singleNoticia", { noticia: noticia, ultimas: ultimas });
+              Author.find({})
+              .sort({ _id: -1 })
+              .exec(function (err, author) {
+                author = author.map(function (val) {
+                  return {
+                    nome: val.nome,
+                    image: val.image,
+                    descricao: val.descricao,
+                  };
+                });
+
+              res.render("singleNoticia", { noticia: noticia, ultimas: ultimas, author: author});
             });
+          });
         } else {
           res.redirect("/");
         }
       }
-    ).populate('categoriaNoticia');
+    ).populate('categoriaNoticia').populate('Author');
   } else {
     Posts.find(
       { titulo: { $regex: req.query.busca, $options: "i" } },

@@ -523,6 +523,13 @@ section.outras-noticias {
   margin-left: 10px;
 }
 
+.movie-details a {
+  text-decoration: none;
+  color: gray;
+  margin-left: 2px;
+  margin-right: 2px;
+}
+
 .movie-reference {
   background-color: gainsboro;
   max-width: 640px;
