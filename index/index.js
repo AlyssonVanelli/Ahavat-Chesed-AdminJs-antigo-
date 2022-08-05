@@ -11,7 +11,6 @@ require("./config/db");
 require("dotenv").config();
 
 const Destaques = require("./models/Destaques.js");
-const DestaquesMobile = require("./models/DestaquesMobile.js");
 const Posts = require("./models/Posts.js");
 const Estudos = require("./models/Estudos.js");
 const Noticias = require("./models/Noticias.js");
@@ -31,26 +30,7 @@ const adminJSOptions = new AdminJS({
   resources: [
     {
       resource: Destaques,
-      options: { properties: { image: { isVisible: { edit: false, list: false, show: false, filter: false } } } },
-      features: [
-        uploadFeature({
-          provider: {
-            local: {
-              bucket: path.join(__dirname, "./public/images"),
-            },
-          },
-          properties: {
-            key: "image",
-            file: "upload file",
-          },
-          uploadPath: (record, filename) =>
-            Date.now() + ".jpg",
-        }),
-      ],
-    },
-    {
-      resource: DestaquesMobile,
-      options: { properties: { image: { isVisible: { edit: false, list: false, show: false, filter: false } } } },
+      options: { properties: { conteudo: { type: "richtext" }, image: { isVisible: { edit: false, list: false, show: false, filter: false } } } },
       features: [
         uploadFeature({
           provider: {
@@ -269,20 +249,12 @@ app.get("/", (req, res) => {
               return {
                 titulo: val.titulo,
                 image: val.image,
-                url: val.url,
+                conteudo: val.conteudo,
+                conteudoCurto: val.conteudoCurto,
+                slug: val.slug,
+                categoria: val.categoria,
               };
             });
-
-            DestaquesMobile.find({})
-            .sort({ _id: -1 })
-            .exec(function (err, destaquesMobile) {
-              destaquesMobile = destaquesMobile.map(function (val) {
-                return {
-                  titulo: val.titulo,
-                  image: val.image,
-                  url: val.url,
-                };
-              });
                 Noticias.find({})
                   .sort({ _id: -1 })
                   .limit(6)
@@ -312,14 +284,12 @@ app.get("/", (req, res) => {
                         res.render("home", {
                           posts: posts,
                           destaques: destaques,
-                          destaquesMobile: destaquesMobile,
                           noticias: noticias,
                           horarios: horarios,
                         });
                       });
                   });
           });
-      });
       });
 
   } else {
@@ -702,25 +672,13 @@ app.get("/post/:slug", (req, res) => {
                 };
               });
 
-              Author.find({})
-              .sort({ _id: -1 })
-              .exec(function (err, author) {
-                author = author.map(function (val) {
-                  return {
-                    nome: val.nome,
-                    image: val.image,
-                    descricao: val.descricao,
-                  };
-                });
-  
-                res.render("single", { noticia: resposta, ultimas: ultimas, author: author });
+              res.render("single", { noticia: resposta, ultimas: ultimas });
             });
-            });
-          } else {
+        } else {
           res.redirect("/");
         }
       }
-    ).populate('categoriaPost').populate('subCategoria').populate('Author')
+    ).populate('categoriaPost').populate('subCategoria')
   } else {
     Posts.find(
       { titulo: { $regex: req.query.busca, $options: "i" } },
@@ -820,25 +778,13 @@ app.get("/noticia/:slug", (req, res) => {
                 };
               });
 
-              Author.find({})
-              .sort({ _id: -1 })
-              .exec(function (err, author) {
-                author = author.map(function (val) {
-                  return {
-                    nome: val.nome,
-                    image: val.image,
-                    descricao: val.descricao,
-                  };
-                });
-
-              res.render("singleNoticia", { noticia: noticia, ultimas: ultimas, author: author});
+              res.render("singleNoticia", { noticia: noticia, ultimas: ultimas });
             });
-          });
         } else {
           res.redirect("/");
         }
       }
-    ).populate('categoriaNoticia').populate('Author');
+    ).populate('categoriaNoticia');
   } else {
     Posts.find(
       { titulo: { $regex: req.query.busca, $options: "i" } },

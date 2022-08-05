@@ -29,3 +29,9 @@ import Component14 from '../node_modules/@adminjs/upload/src/features/upload-fil
 AdminJS.UserComponents.Component14 = Component14
 import Component15 from '../node_modules/@adminjs/upload/src/features/upload-file/components/show'
 AdminJS.UserComponents.Component15 = Component15
+import Component16 from '../node_modules/@adminjs/upload/src/features/upload-file/components/edit'
+AdminJS.UserComponents.Component16 = Component16
+import Component17 from '../node_modules/@adminjs/upload/src/features/upload-file/components/list'
+AdminJS.UserComponents.Component17 = Component17
+import Component18 from '../node_modules/@adminjs/upload/src/features/upload-file/components/show'
+AdminJS.UserComponents.Component18 = Component18

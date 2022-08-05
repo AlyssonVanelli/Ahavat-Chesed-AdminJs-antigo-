@@ -4,7 +4,9 @@ var Schema = mongoose.Schema;
 var destaqueSchema = new Schema({
     titulo:String,
     image:String,
-    url:String,
+    categoria:String,
+    conteudo:String,
+    slug:String
 },{collection:'destaques'})
 
 var Destaques = mongoose.model('Destaques',destaqueSchema)

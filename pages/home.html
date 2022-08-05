@@ -7,10 +7,10 @@
                     <div class="carousel-inner">
                         <% for (let i=0; i < destaques.length; i++) { %>
                             <div class="carousel-item active" data-bs-interval="5000">
-                                <img src="../public/images/<%= destaques[i].image %>" class="d-block w-100"
-                                    alt="<%= destaques[i].titulo %>">
+                                <a href="<%= destaques[i].url %>"><img src="../public/images/<%= destaques[i].image %>" class="d-block w-100"
+                                    alt="<%= destaques[i].titulo %>" /></a>
                             </div>
-                            <% } %>
+                        <% } %>
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade"
                         data-bs-slide="prev">
@@ -26,6 +26,31 @@
             </div>
         </div>
     </section>
+
+    <div style="margin-bottom: 20px;"" class="img-destaque-mobile">
+        <div class="title-destaque-descricao">
+            <div id="carouselExampleFadeMobile" class="carousel slide carousel-fade" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <% for (let i=0; i < destaquesMobile.length; i++) { %>
+                        <div class="carousel-item active" data-bs-interval="5000">
+                            <a href="<%= destaques[i].url %>"><img src="../public/images/<%= destaquesMobile[i].image %>" class="d-block w-100"
+                                alt="<%= destaquesMobile[i].titulo %>" /></a>   
+                        </div>
+                    <% } %>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFadeMobile"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFadeMobile"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </div>
 
     <div id="main-container">
         <div class="col-md-12">

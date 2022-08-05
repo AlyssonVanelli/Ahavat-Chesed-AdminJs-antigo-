@@ -88,7 +88,7 @@ body {
 }
 
 .img-destaque img {
-  height: 500px;
+  height: 26.041vw;
 }
 
 /* Informações */
@@ -950,7 +950,24 @@ section.outras-noticias {
   padding-right: 5px;
 }
 
+.img-destaque-mobile{
+  display: none;
+}
+
 @media (max-width: 414px) {
+
+  .img-destaque-mobile{
+    display: block;
+  }
+
+  .img-destaque-mobile img{
+    height: 80vw;
+  }
+
+  .noticia-destaque{
+    display: none;
+  }
+  
   .ultimas {
     width: 100%;
     margin-top: 20px;
