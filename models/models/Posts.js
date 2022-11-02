@@ -21,7 +21,11 @@ var postsSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'SubCategorias',
     },
-
+    Author: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Author',
+        required: true
+    }
 }, { collection: 'posts' })
 
 var Posts = mongoose.model('Posts', postsSchema)

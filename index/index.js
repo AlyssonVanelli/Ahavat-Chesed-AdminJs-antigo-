@@ -6,7 +6,7 @@ const AdminJSExpress = require("@adminjs/express");
 const AdminJSMongoose = require("@adminjs/mongoose");
 const uploadFeature = require("@adminjs/upload");
 const bcrypt = require('bcrypt');
-const ObjectId = require('mongodb').ObjectId; 
+const ObjectId = require('mongodb').ObjectId;
 require("./config/db");
 require("dotenv").config();
 
@@ -255,40 +255,40 @@ app.get("/", (req, res) => {
                 categoria: val.categoria,
               };
             });
-                Noticias.find({})
-                  .sort({ _id: -1 })
-                  .limit(6)
-                  .populate('categoriaNoticia')
-                  .exec(function (err, noticias) {
-                    noticias = noticias.map(function (val) {
+            Noticias.find({})
+              .sort({ _id: -1 })
+              .limit(6)
+              .populate('categoriaNoticia')
+              .exec(function (err, noticias) {
+                noticias = noticias.map(function (val) {
+                  return {
+                    titulo: val.titulo,
+                    image: val.image,
+                    conteudo: val.conteudo,
+                    conteudoCurto: val.conteudoCurto,
+                    slug: val.slug,
+                    categoria: val.categoriaNoticia.categoria,
+                  };
+                });
+
+                Horarios.find({})
+                  .sort({ _id: 1 })
+                  .exec(function (err, horarios) {
+                    horarios = horarios.map(function (val) {
                       return {
                         titulo: val.titulo,
-                        image: val.image,
-                        conteudo: val.conteudo,
-                        conteudoCurto: val.conteudoCurto,
-                        slug: val.slug,
-                        categoria: val.categoriaNoticia.categoria,
+                        horario: val.horario,
                       };
                     });
 
-                    Horarios.find({})
-                      .sort({ _id: 1 })
-                      .exec(function (err, horarios) {
-                        horarios = horarios.map(function (val) {
-                          return {
-                            titulo: val.titulo,
-                            horario: val.horario,
-                          };
-                        });
-
-                        res.render("home", {
-                          posts: posts,
-                          destaques: destaques,
-                          noticias: noticias,
-                          horarios: horarios,
-                        });
-                      });
+                    res.render("home", {
+                      posts: posts,
+                      destaques: destaques,
+                      noticias: noticias,
+                      horarios: horarios,
+                    });
                   });
+              });
           });
       });
 
@@ -475,15 +475,15 @@ app.get("/contribua", (req, res) => {
 app.get("/sefertorah", (req, res) => {
   if (req.query.busca == null) {
     SeferTorah.find({})
-    .exec(function (err, parasha) {
-      parasha = parasha.map(function (val) {
-        return {
-          parasha: val.parasha,
-          doador: val.doador,
-        };
+      .exec(function (err, parasha) {
+        parasha = parasha.map(function (val) {
+          return {
+            parasha: val.parasha,
+            doador: val.doador,
+          };
+        });
+        res.render("sefertorah", { parasha: parasha });
       });
-      res.render("sefertorah", { parasha: parasha });
-    });
   } else {
     Posts.find(
       { titulo: { $regex: req.query.busca, $options: "i" } },
@@ -716,44 +716,44 @@ app.get("/post/:slug", (req, res) => {
 
 app.get("/post/categorias/:categoria", (req, res) => {
   Posts.find(
-    {categoriaPost: { _id: new ObjectId(req.params.categoria) } }, 
+    { categoriaPost: { _id: new ObjectId(req.params.categoria) } },
   )
-  .populate('categoriaPost')
-  .exec(function (err, posts) {
-    posts = posts.map(function (val) {
-      return {
-        titulo: val.titulo,
-        image: val.image,
-        conteudo: val.conteudo,
-        conteudoCurto: val.conteudoCurto,
-        slug: val.slug,
-        categoria: val.categoriaPost,
-      };
-    });
+    .populate('categoriaPost')
+    .exec(function (err, posts) {
+      posts = posts.map(function (val) {
+        return {
+          titulo: val.titulo,
+          image: val.image,
+          conteudo: val.conteudo,
+          conteudoCurto: val.conteudoCurto,
+          slug: val.slug,
+          categoria: val.categoriaPost,
+        };
+      });
 
-    res.render("categoriasPosts", {posts})
-  });
+      res.render("categoriasPosts", { posts })
+    });
 })
 
 app.get("/post/subcategorias/:subcategoria", (req, res) => {
   Posts.find(
-    {subCategoria: { _id: new ObjectId(req.params.subcategoria) } }, 
+    { subCategoria: { _id: new ObjectId(req.params.subcategoria) } },
   )
-  .populate('subCategoria')
-  .exec(function (err, posts) {
-    posts = posts.map(function (val) {
-      return {
-        titulo: val.titulo,
-        image: val.image,
-        conteudo: val.conteudo,
-        conteudoCurto: val.conteudoCurto,
-        slug: val.slug,
-        categoria: val.subCategoria,
-      };
-    });
+    .populate('subCategoria')
+    .exec(function (err, posts) {
+      posts = posts.map(function (val) {
+        return {
+          titulo: val.titulo,
+          image: val.image,
+          conteudo: val.conteudo,
+          conteudoCurto: val.conteudoCurto,
+          slug: val.slug,
+          categoria: val.subCategoria,
+        };
+      });
 
-    res.render("subcategoriasPosts", {posts})
-  });
+      res.render("subcategoriasPosts", { posts })
+    });
 })
 
 app.get("/noticia/:slug", (req, res) => {
@@ -822,23 +822,23 @@ app.get("/noticia/:slug", (req, res) => {
 
 app.get("/noticia/categoria/:categoria", (req, res) => {
   Noticias.find(
-    {categoriaNoticia: { _id: new ObjectId(req.params.categoria) } }, 
+    { categoriaNoticia: { _id: new ObjectId(req.params.categoria) } },
   )
-  .populate('categoriaNoticia')
-  .exec(function (err, noticia) {
-    noticia = noticia.map(function (val) {
-      return {
-        titulo: val.titulo,
-        image: val.image,
-        conteudo: val.conteudo,
-        conteudoCurto: val.conteudoCurto,
-        slug: val.slug,
-        categoria: val.categoriaNoticia,
-      };
-    });
+    .populate('categoriaNoticia')
+    .exec(function (err, noticia) {
+      noticia = noticia.map(function (val) {
+        return {
+          titulo: val.titulo,
+          image: val.image,
+          conteudo: val.conteudo,
+          conteudoCurto: val.conteudoCurto,
+          slug: val.slug,
+          categoria: val.categoriaNoticia,
+        };
+      });
 
-    res.render("categoriasNoticias", {noticia})
-  });
+      res.render("categoriasNoticias", { noticia })
+    });
 })
 
 app.listen(5000, () => {

@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 
 var postsSchema = new Schema({
     titulo: { type: String, required: true },
-    image: { type: String, required: true },
+    image: { type: String },
     conteudoCurto: { type: String, required: true },
     conteudo: { type: String, required: true },
     slug: { type: String, required: true },
