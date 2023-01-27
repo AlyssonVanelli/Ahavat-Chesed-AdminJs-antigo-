@@ -22,6 +22,7 @@ const CategoriaPosts = require("./models/CategoriaPosts");
 const SubCategoria = require("./models/SubCategoria");
 const Author = require("./models/Author");
 const SeferTorah = require("./models/SeferTorah");
+const Materiais = require("./models/materiais");
 
 const app = express();
 
@@ -109,6 +110,33 @@ const adminJSOptions = new AdminJS({
     },
     {
       resource: Estudos,
+      options: {
+        properties: {
+          conteudo: { type: "richtext" },
+          titulo: { type: "richtext" },
+          conteudoCurto: { type: "richtext" },
+          categoria: { type: "richtext" },
+          image: { isVisible: { edit: false, list: false, show: false, filter: false } }
+        },
+      },
+      features: [
+        uploadFeature({
+          provider: {
+            local: {
+              bucket: path.join(__dirname, "./public/images"),
+            },
+          },
+          properties: {
+            key: "image",
+            file: "upload file",
+          },
+          uploadPath: (record, filename) =>
+            Date.now() + ".jpg",
+        }),
+      ],
+    },
+    {
+      resource: Materiais,
       options: {
         properties: {
           conteudo: { type: "richtext" },
@@ -599,6 +627,7 @@ app.get("/estudos", (req, res) => {
             titulo: val.titulo,
             image: val.image,
             conteudo: val.conteudo,
+            categoria: val.categoria,
             conteudoCurto: val.conteudoCurto,
             url: val.url,
           };
@@ -637,6 +666,77 @@ app.get("/estudos", (req, res) => {
             res.render("busca", { posts: posts, contagem: posts.length, noticias: noticias, contagem2: noticias.length });
           }
         );
+      }
+    )
+  }
+});
+
+app.get("/materiais", (req, res) => {
+  if (req.query.busca == null) {
+    Materiais.find({})
+      .sort({ _id: -1 })
+      .exec(function (err, materiais) {
+        materiais = materiais.map(function (val) {
+          return {
+            titulo: val.titulo,
+            image: val.image,
+            conteudo: val.conteudo,
+            categoria: val.categoria,
+            conteudoCurto: val.conteudoCurto,
+            url: val.url,
+          };
+        });
+
+        res.render("materiais", { materiais: materiais });
+      });
+  } else {
+    Posts.find(
+      { titulo: { $regex: req.query.busca, $options: "i" } },
+      function (err, posts) {
+        posts = posts.map(function (val) {
+          return {
+            titulo: val.titulo,
+            conteudo: val.conteudo,
+            descricaoCurta: val.conteudoCurto,
+            image: val.image,
+            slug: val.slug,
+          };
+        });
+
+        Noticias.find(
+          { titulo: { $regex: req.query.busca, $options: "i" } },
+          function (err, noticias) {
+            noticias = noticias.map(function (val) {
+              return {
+                titulo: val.titulo,
+                conteudo: val.conteudo,
+                descricaoCurta: val.conteudoCurto,
+                image: val.image,
+                slug: val.slug,
+                categoria: val.categoria,
+              };
+            });
+
+            Materiais.find(
+              { titulo: { $regex: req.query.busca, $options: "i" } },
+              function (err, materiais) {
+                materiais = materiais.map(function (val) {
+                  return {
+                    titulo: val.titulo,
+                    conteudo: val.conteudo,
+                    descricaoCurta: val.conteudoCurto,
+                    image: val.image,
+                    slug: val.slug,
+                    categoria: val.categoria,
+                  };
+                });
+
+                res.render("busca", { posts: posts, contagem: posts.length, noticias: noticias, contagem2: noticias.length, materiais: materiais });
+              }
+            );
+
+          }
+        )
       }
     )
   }
